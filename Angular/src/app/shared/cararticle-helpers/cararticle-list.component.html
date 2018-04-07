@@ -1,0 +1,41 @@
+<div class="input-group" style="padding-top:0px;margin-top:20px;">
+    <input (keyup.enter)="searchd()" type="text" class="form-control" placeholder="Search Vehicles..." [(ngModel)] = "searchTerm" name="searchTerm">
+    <span class="input-group-btn">
+      <button class="btn btn-success" type="button" (click) = "searchd()">Search</button>
+    </span>
+</div>
+
+
+<cararticle-preview
+  *ngFor="let cararticle of results | paginate: { itemsPerPage: 10, currentPage: p }"
+  [cararticle]="cararticle">
+</cararticle-preview>
+
+<div class="cararticle-preview"
+  [hidden]="!loading">
+  Loading Vehicles...
+</div>
+
+<div class="cararticle-preview"
+  [hidden]="loading || results.length">
+  What? No Vehicles are here... yet?.
+  This empty timeline won’t be around for long. Either you are not following anyone!! Start following people and you’ll see Vehicles show up here...
+  -OR- this User has not posted anything on this timeline!!
+</div>
+
+<pagination-controls (click)="scroll()" (pageChange)="p = $event" autoHide="true"></pagination-controls>
+
+<nav [hidden]="loading || totalPages <= 1">
+  <ul class="pagination">
+
+    <li class="page-item"
+      [ngClass]="{'active': pageNumber === currentPage}"
+      *ngFor="let pageNumber of totalPages"
+      (click)="setPageTo(pageNumber)">
+
+      <a class="page-link" href="#">{{ pageNumber }}</a>
+
+    </li>
+
+  </ul>
+</nav>

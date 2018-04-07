@@ -1,0 +1,43 @@
+<div class="article-preview">
+  <apatarticle-meta [apatarticle]="apatarticle">
+    <apatfavorite-button
+      [apatarticle]="apatarticle"
+      (onToggle)="onToggleFavorite($event)"
+      class="pull-xs-right">
+      {{apatarticle.favoritesCount}}
+    </apatfavorite-button>
+  </apatarticle-meta>
+
+  <a (click)="openModalWithComponent()" class="preview-link">
+    <h1>{{ apatarticle.title }}</h1>
+    <h6><span style="color:black;font-size:20px"><strong>Location:</strong></span> {{ apatarticle.location }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Item:</strong></span> {{ apatarticle.name1 }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Desc:</strong></span> {{ apatarticle.description1 }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Price:</strong></span> {{ apatarticle.price1 }}</h6>
+    <div>
+      <!--<p>{{ bizarticle.description1 }}</p> [routerLink]="['/bizarticle', bizarticle.slug]"-->
+      <img style="width:100%; background-color:white;" class="thumbnail" src="{{apatarticle.postImage}}">
+    </div>
+    <!--<div>
+      p>{{ bizarticle.description1 }}</p>->
+      <img style="width:100%; background-color:white;" class="thumbnail" src="{{bizarticle.postImage1}}">
+    </div>-->
+    
+    <span>Read more...</span>
+    <ul class="tag-list">
+      <li class="tag-default tag-pill tag-outline"
+        *ngFor="let tag of apatarticle.tagList">
+        {{ tag }}
+      </li>
+    </ul>
+  </a>
+</div>
+
+
+<!--<p>{{ article.description }}</p>-->
+<!--<p>{{ listing.description }}</p>
+ <hr /> -->
+
+
+
+<!--<img [src]="comment.author.image" class="comment-author-img" />-->

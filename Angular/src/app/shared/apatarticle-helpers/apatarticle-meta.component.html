@@ -1,0 +1,22 @@
+<div class="article-meta">
+  <a [routerLink]="['/profileapat', apatarticle.author.username]">
+    <img src="{{apatarticle.author.image}}" />
+  </a>
+
+  <div class="info">
+    <a class="author"
+      [routerLink]="['/profileapat', apatarticle.author.username]">
+      {{ apatarticle.author.username }}
+    </a>
+    <span class="date" style="color:black;">
+      {{ apatarticle.createdAt | date: 'longDate' }}
+    </span>
+  </div>
+
+  <ng-content></ng-content>
+</div>
+
+<!--
+  <img [src]="bizarticle.author.image" />
+src="http://localhost:3000/images/{{currentUser.image}}"
+-->

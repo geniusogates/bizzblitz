@@ -1,0 +1,196 @@
+<div class="modal-header">
+      <h4 class="modal-title pull-left">{{title}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+
+<div class="article-page modal-body">
+
+  <div class="banner modal-body" style="margin:-15px;margin-top:-15px;background-color:#00533F">
+    <div class="container">
+      <h1>{{ landarticle.title }}</h1>
+      <h4><strong style="color:black;font-size:20px">Location: </strong><span style="font-size:15px"> {{ landarticle.location }}</span></h4>
+      <h4><strong style="color:black;font-size:20px">Item: </strong><span style="font-size:15px"> {{ landarticle.name1 }}</span></h4>
+      <h4><strong style="color:black;font-size:20px">Price: </strong><span style="font-size:15px"> {{ landarticle.price1 }}</span></h4>
+      <h4><strong style="color:black;font-size:20px">Phone: </strong> <a style="color:white;" href="https://api.whatsapp.com/send?phone={{ landarticle.phone }}"><span style="font-size:15px">{{ landarticle.phone }} <i style="color:#01E675;font-size:20px;" class="fa fa-whatsapp" aria-hidden="true"></i></span></a></h4>
+      <h4><strong style="color:black;font-size:20px">Email: </strong><span style="font-size:15px"> {{ landarticle.email }}</span></h4>
+
+     <landarticle-meta [landarticle]="landarticle" (click)="bsModalRef.hide()">
+      
+          <span [hidden]="!canModify">
+          <a class="btn btn-sm btn-outline-secondary"
+             [routerLink]="['/landeditor', landarticle.slug]">
+            <i class="ion-edit"></i>
+          </a>
+
+          <button class="btn btn-sm btn-outline-danger"
+            [ngClass]="{disabled: isDeleting}"
+            (click)="deleteLandArticle()">
+            <i class="ion-trash-a"></i>
+          </button>
+        </span>
+
+        <span [hidden]="canModify">
+          <follow-button
+            [profile]="landarticle.author"
+            (onToggle)="onToggleFollowing($event)">
+          </follow-button>
+
+          <landfavorite-button
+            [landarticle]="landarticle"
+            (onToggle)="onToggleFavorite($event)">
+            <!--{{ landarticle.favorited ? 'Unfavorite' : 'Favorite' }} Land--> <span class="counter">({{ landarticle.favoritesCount }})</span>
+          </landfavorite-button>
+        </span>
+
+     </landarticle-meta>
+    </div>
+    <!--<div class="container">
+      <p>{{ bizarticle.description }}</p>
+      <img style="width:20%;height:250px; background-color:white;" class="thumbnail" src="{{bizarticle.postImage}}">
+    </div>
+  style="padding-top:0px;margin-top:120px;"
+  First slide Second slide Third slide-->
+  </div>
+
+  <div class="modal-body" style="margin:-30px;">
+      <img style="width:100%; background-color:white;" class="thumbnail" src="{{landarticle.postImage}}">
+      <img style="width:100%; background-color:white; height:''" class="thumbnail" src="{{landarticle.postImage1}}">
+      <img style="width:100%; background-color:white; height:''" class="thumbnail" src="{{landarticle.postImage2}}">
+
+    </div>
+
+<!--<div class="modal-body" style="margin-top:35px;">
+ <carousel>
+  <slide>
+    <img src="{{bizarticle.postImage}}" alt="" style="display: block; width: 100%;background-color:white;">
+  </slide>
+  <slide>
+    <img src="{{bizarticle.postImage1}}" alt="" style="display: block; width: 100%;background-color:white;">
+  </slide>
+  <slide>
+    <img src="{{bizarticle.postImage2}}" alt="" style="display: block; width: 100%;background-color:white;">
+  </slide>
+</carousel>
+</div>-->
+
+  <div class="container page modal-body" style="margin:-15px;">
+
+    <div class="row article-content">
+      <div class="col-md-12">
+
+        <div class="page modal-body" [innerHTML]="landarticle.body | landmarkdown"></div>
+        <div class="page modal-body" [innerHTML]="landarticle.description | landmarkdown"></div>
+        <div class="page modal-body" [innerHTML]="landarticle.description1 | landmarkdown"></div>
+         
+        <!--<<div>
+          <img style="width:100%;" class="thumbnail" src="{{bizarticle.postImage}}">
+        </div>
+        <div>
+          <img style="width:100%;" class="thumbnail" src="{{bizarticle.postImage1}}">
+        </div>
+        <div>
+          <img style="width:100%;" class="thumbnail" src="{{bizarticle.postImage2}}">
+        </div>-->
+           <div class="modal-body">
+              <ul class="tag-list">
+                <li *ngFor="let tag of landarticle.tagList"
+                  class="tag-default tag-pill tag-outline">
+                  {{ tag }}
+                </li>
+              </ul>
+           </div>
+
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="article-actions">
+     <landarticle-meta [landarticle]="landarticle">
+
+          <span [hidden]="!canModify">
+          <a class="btn btn-sm btn-outline-secondary"
+             [routerLink]="['/landeditor', landarticle.slug]">
+            <i class="ion-edit"></i>
+          </a>
+
+          <button class="btn btn-sm btn-outline-danger"
+            [ngClass]="{disabled: isDeleting}"
+            (click)="deleteLandArticle()">
+            <i class="ion-trash-a"></i>
+          </button>
+        </span>
+
+        <span [hidden]="canModify">
+          <follow-button
+            [profile]="landarticle.author"
+            (onToggle)="onToggleFollowing($event)">
+          </follow-button>
+
+          <landfavorite-button
+            [landarticle]="landarticle"
+            (onToggle)="onToggleFavorite($event)">
+            <!--{{ landarticle.favorited ? 'Unfavorite' : 'Favorite' }} Landarticle--> <span class="counter">({{ landarticle.favoritesCount }})</span>
+          </landfavorite-button>
+        </span>
+
+      </landarticle-meta>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+
+        <div *showAuthed="true">
+          <list-errors [errors]="commentFormErrors"></list-errors>
+          <form class="card comment-form" (ngSubmit)="addComment()">
+            <fieldset [disabled]="isSubmitting">
+              <div class="card-block">
+                <textarea class="form-control"
+                  placeholder="Write a comment..."
+                  rows="3"
+                  [formControl]="commentControl"
+                ></textarea>
+              </div>
+              <div class="card-footer">
+                <img src="{{currentUser.image}}" class="comment-author-img" />
+                <button [disabled]="!commentControl.value" class="btn btn-sm btn-primary" type="submit">
+                 Comment
+                </button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+
+        <div *showAuthed="false">
+          <a style="color:mediumblue;" [routerLink]="['/login']" (click)="bsModalRef.hide()">Sign in</a> or <a style="color:mediumblue;" [routerLink]="['/register']" (click)="bsModalRef.hide()">sign up</a> to add comments on this Land.
+        </div>
+
+        <landarticle-comment
+          *ngFor="let comment of comments"
+          [comment]="comment"
+          (deleteComment)="onDeleteComment(comment)">
+        </landarticle-comment>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+</div>
+
+
+
+<!--
+  Colors for banner
+#E5BAD6-pink
+#1A1A1A-black
+#4C5053-best grey
+#454545-not bad grey
+<img [src]="currentUser.image" class="comment-author-img" />
+-->

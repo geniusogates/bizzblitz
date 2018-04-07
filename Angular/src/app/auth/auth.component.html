@@ -1,0 +1,140 @@
+<!--<div class="auth-page" style="padding-top:0px;margin-top:120px;">
+  <div class="container page">
+    <div class="row">
+
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <button class="btn btn-outline-success"
+          (click)="regist()">
+          register user.
+        </button>
+        <h1 class="text-xs-center">{{ title }}</h1>
+        <p class="text-xs-center">
+          <a [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
+          <a [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
+        </p>
+        <p>{{flash | json}}</p>
+        <list-errors [errors]="errors"></list-errors>
+        <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+          <fieldset [disabled]="isSubmitting">
+            <fieldset class="form-group">
+              <input
+                formControlName="username"
+                placeholder="Username"
+                class="form-control form-control-lg"
+                type="text"
+                *ngIf="authType == 'register'" />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                formControlName="email"
+                placeholder="Email"
+                class="form-control form-control-lg"
+                type="text" />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                formControlName="password"
+                placeholder="Password"
+                class="form-control form-control-lg"
+                type="password" />
+            </fieldset>
+            <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!authForm.valid" type="submit">
+              {{ title }}
+            </button>
+          </fieldset>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>-->
+
+
+
+
+<!--//main__body//card////margin-left:600px;width:1000px/////class="login__page"//col-md-offset-4///////////////////////////////////////////////////////-->
+<div class="auth-page" style="padding-top:0px;margin-top:120px;">
+  <div class="container page">
+
+    <div >
+      <div class="row">
+          <div class="card col-md-6 offset-md-3 col-xs-12" style="">
+            <div class="login__card">
+              <div class="card-block">
+
+                  <form>
+                    <h3 align="center">Login Form</h3>
+                    
+                    <div >
+                      <label for="exampleInputEmail1">Email address</label>
+                      <fieldset class="form-group">
+                      <input type="email" class="form-control" name="user.email"  [(ngModel)]="user.email" placeholder="Email" required>
+                      </fieldset>
+                    </div>
+                    
+                    
+                    <div >
+                      <label for="exampleInputPassword1">Password</label>
+                      <fieldset class="form-group">
+                      <input type="password" class="form-control"  name="user.password" [(ngModel)]="user.password"  placeholder="Password" required>
+                      </fieldset>
+                    </div>
+                    
+
+                    <div >
+                        <button type="buton" class="btn btn-primary btn-block" (click)="signInWithEmail()"  style="margin-bottom: 20px">
+                          Login with Email
+                        </button>
+                    </div>
+                    <div style="text-align:center;"><a class="nav-link" href="/register"><h6>Need an account? Register</h6></a></div>
+                  </form>
+                  <!--<form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email address For password Reset</label>
+                      <input type="email" class="form-control" name="user.email"  [(ngModel)]="user.email" id="exampleInputEmail1" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="buton" class="btn btn-primary btn-block" (click)="resetPassword()" [disabled]="formCtrl.form.invalid" style="margin-bottom: 20px">
+                          Send me password reset Email.
+                        </button>
+                    </div>
+                  </form>-->
+
+                  <div style="text-align:center"><h6>-or-</h6></div>
+                    
+
+                    <div class="form-group">
+                        <button style="background-color:#DD4B3E;color:white;" type="button" class="btn btn-block" (click)="signInWithGoogle()">
+                          <i class="fa fa-google pull-xs-left" aria-hidden="true"></i>
+                          Login with Google
+                        </button>
+
+                        <button style="background-color:#3B579D;color:white;" type="buton" class="btn btn-block" (click)="signInWithFacebook()">
+                          <i class="fa fa-facebook pull-xs-left" aria-hidden="true"></i> 
+                          Login with Facebook
+                        </button>
+
+                        <button style="background-color:#32CDFD;color:white;" type="button" class="btn btn-block" (click)="signInWithTwitter()">
+                          <i class="fa fa-twitter pull-xs-left" aria-hidden="true"></i>
+                          Login with Twitter
+                        </button>
+
+                        <!--<button type="button" class="btn btn-block">
+                          <i class="fa fa-github" aria-hidden="true"></i>
+                          Login with Github
+                        </button>-->
+
+                        
+                    </div>                  
+                  <!--</form>-->
+                  
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div> <!-- end card -->
+
+  </div>  <!-- end container -->
+</div> 
+<!--//////////////////////////////////////////////////////////////////////-->

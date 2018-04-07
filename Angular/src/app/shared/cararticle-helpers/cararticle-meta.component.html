@@ -1,0 +1,22 @@
+<div class="article-meta">
+  <a [routerLink]="['/profilecar', cararticle.author.username]">
+    <img src="{{cararticle.author.image}}" />
+  </a>
+
+  <div class="info">
+    <a class="author"
+      [routerLink]="['/profilecar', cararticle.author.username]">
+      {{ cararticle.author.username }}
+    </a>
+    <span class="date" style="color:lightseagreen">
+      {{ cararticle.createdAt | date: 'longDate' }}
+    </span>
+  </div>
+
+  <ng-content></ng-content>
+</div>
+
+<!--
+  <img [src]="bizarticle.author.image" />
+src="http://localhost:3000/images/{{currentUser.image}}"
+-->

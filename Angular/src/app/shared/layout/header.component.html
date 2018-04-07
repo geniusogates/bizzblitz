@@ -1,0 +1,237 @@
+ 
+
+
+<nav class="navbar navbar-default navbar-fixed-top col-xs-12 col-md-12" style="margin-bottom:0px;margin-top:0px;padding-bottom:0px;padding-top:0px;background-color:royalblue;">
+  <div class="container">
+    <!--<a class="navbar-brand" style="Color:royalblue;" routerLink=""><span style="Color:white;">Bizzchat</span></a>-->
+    <ul class="nav navbar-nav pull-xs-left" style="margin-left:0px;margin-right:0px;">
+      <li>
+          <a  style="Color:royalblue;font-size:x-large;margin-left:0px;margin-right:0px;"  routerLink=""><span style="Color:white;"><strong>Bizzchat</strong></span></a>
+      </li>
+    </ul>
+    <!-- *ngIf="!authService.isLoggedIn()" Show this for logged out users *showAuthed="false" -->
+    <ul  *showAuthed="false"
+    
+      class="nav navbar-nav pull-xs-right">
+
+      <li class="nav-item">
+        <a class="nav-link"
+          routerLink="">
+          <i style="color:black;" class="fa fa-home" aria-hidden="true"></i><span style="color:black;"></span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link"
+          routerLink="/login"
+          routerLinkActive="active">
+          <span style="color:black;">Sign in</span>
+        </a>
+      </li>
+
+      <!--<li class="nav-item">
+        <a class="nav-link"
+          routerLink="/register"
+          routerLinkActive="active">
+          <span style="color:black;">Sign up</span>
+        </a>
+      </li>-->
+
+    </ul>
+    <!--///////////////////////////////////////////////-->
+
+    <!--/////////*ngIf="authService.isLoggedIn()"////////////////////////*showAuthed="true"/////////////-->
+
+    <!-- Show this for logged in users -->
+<ul *showAuthed="true" class="nav navbar-nav pull-xs-right">
+      <!--//////////////////////////////////////////////-->
+<div *ngIf="currentUser" class="btn-group" dropdown>
+  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+    +Add<span class="caret"></span>
+  </button>
+  <ul *dropdownMenu class="dropdown-menu" role="menu">
+    <li role="menuitem"><a class="dropdown-item" href="/editor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Post Article</span></a></li>
+    <li role="menuitem"><a class="dropdown-item" href="/shouteditor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Shout-Out</span></a></li>
+    <li role="menuitem"><a class="dropdown-item" href="/bizeditor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Sell Item</span></a></li>
+    <li role="menuitem"><a class="dropdown-item" href="/careditor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Sell Car</span></a></li>
+    <li role="menuitem"><a class="dropdown-item" href="/apateditor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Apartment/Rentals</span></a></li>
+    <li role="menuitem"><a class="dropdown-item" href="/landeditor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Sell/Rent Land</span></a></li>
+    <li class="divider dropdown-divider"></li>
+    <li role="menuitem"><a class="dropdown-item" href="/">Go Home!!</a>
+    </li>
+  </ul>
+</div>
+      <!--/////////////////////////////////////////////-->
+
+      <!--<li class="nav-item">
+        <a class="nav-link"
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <i class="ion-home"></i>
+         
+        </a>
+      </li>-->
+      <!--<li class="nav-item">
+          <a class="nav-link"
+            routerLink="/editor"
+            routerLinkActive="active">
+            <i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Article</span>
+          </a>
+        </li>-->
+
+        <!--<li class="nav-item">
+            <a class="nav-link"
+              routerLink="/shouteditor"
+              routerLinkActive="active">
+              <i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Shout</span>
+            </a>
+          </li>-->
+      <!--<li class="nav-item">
+          <a class="nav-link"
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <i class="ion-mail"></i>
+          </a>
+      </li>-->
+
+      <!--<li class="nav-item">
+        <a class="nav-link"
+          routerLink="/bizeditor"
+          routerLinkActive="active">
+          <i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Bizz</span>
+        </a>
+      </li>-->
+
+      
+
+      
+
+      <li class="nav-item">
+        <a class="nav-link"
+          routerLink="/settings"
+          routerLinkActive="active">
+          <i style="color:black;font-size:17.5px;" class="ion-gear-a"></i>&nbsp;<span style="color:black;"></span>
+        </a>
+      </li>
+      <!--
+         <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic" />
+      -->
+
+      <li class="nav-item" style="margin-right:10px;">
+        <a class="nav-link"
+          [routerLink]="['/profile', currentUser.username]"
+          routerLinkActive="active">
+          <img src="{{ currentUser.image }}" *ngIf="currentUser.image" class="user-pic" />
+          <!--*ngIf="currentUser.image" {{ currentUser.username||image }} authService. {{currentUser.photoURL}}-->
+        </a>
+      </li>
+
+</ul>
+    <!--/////////////////////////////////////////////////-->
+ <!--<ul class="nav navbar-nav pull-xs-right" style="margin-right:10px;">
+   <li class="nav-item" *showAuthed="true">
+       <div class="btn-group" dropdown>
+          <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+            +Add<span class="caret"></span>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li role="menuitem"><a class="dropdown-item" href="/editor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Post Article</span></a></li>
+            <li role="menuitem"><a class="dropdown-item" href="/shouteditor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Shout-Out</span></a></li>
+            <li role="menuitem"><a class="dropdown-item" href="/bizeditor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Sell Item</span></a></li>
+            <li role="menuitem"><a class="dropdown-item" href="/careditor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Sell Car</span></a></li>
+            <li role="menuitem"><a class="dropdown-item" href="/apateditor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Apartment/Rentals</span></a></li>
+            <li role="menuitem"><a class="dropdown-item" href="/landeditor"><i style="color:black;" class="ion-compose"></i>&nbsp;<span style="color:black;">Sell/Rent Land</span></a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" href="/">Go Home!!</a>
+            </li>
+          </ul>
+        </div>
+   </li>
+ </ul>-->
+    <!--////////////////////////////////////////////////-->
+
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<nav class="navbar navbar-default navbar-fixed-top">
+ <div class="container">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="webapp.html">
+          <img src="imgs/logo.png" class="img-responsive">
+      </a>
+        <button type="button" class="navbar-toggle collapsed" datatoggle="
+        collapse" data-target="#nav-menu" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+<!- <a class="btn btn-primary navbar-btn pull-left"
+href="#" role="button">Sign up</a> -
+</div>
+   <div id="nav-menu" class="collapse navbar-collapse">
+          <ul *showAuthed="false" class="nav navbar-nav">
+            <li>
+      <a class="nav-link" routerLink="/">
+      Home
+      </a>
+      </li>
+      <li>
+      <a href="#">
+      Notifications
+      </a>
+      </li>
+      <li>
+      <a href="#">
+      Messages
+      </a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav">
+<li>
+<a href="#">
+<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+
+Home
+</a>
+</li>
+<li>
+<a href="#">
+<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+
+Notifications
+</a>
+</li>
+<li>
+<a href="#">
+<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+
+Messages
+</a>
+</li>
+<li>
+      <a href="#">
+      Notifications
+      </a>
+      </li>
+</ul>
+
+  </div>
+ </div>
+</nav>
+-->
+

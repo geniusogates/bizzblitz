@@ -1,0 +1,560 @@
+<!--<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+
+
+                          <div class="modal-body">-->
+                            <!--///////////////////////////////////////////////////////////-->
+                            
+                            <!--
+                            <div class="article-page">
+
+                              <div class="banner" style="padding-top:120px;margin-top:0px;">
+                                <div class="container">
+                                  <h1>{{ article.title }}</h1>
+
+                                  <article-meta [article]="article">
+                                  
+                                      <span [hidden]="!canModify">
+                                      <a class="btn btn-sm btn-outline-secondary"
+                                        [routerLink]="['/editor', article.slug]">
+                                        <i class="ion-edit"></i> Edit Article
+                                      </a>
+
+                                      <button class="btn btn-sm btn-outline-danger"
+                                        [ngClass]="{disabled: isDeleting}"
+                                        (click)="deleteArticle()">
+                                        <i class="ion-trash-a"></i> Delete Article
+                                      </button>
+                                    </span>
+                                    -->
+                          <!--/////////////////////////////////////////////////////////////////-->
+                                    <!--<span [hidden]="canModify">
+                                      <follow-button
+                                        [profile]="article.author"
+                                        (onToggle)="onToggleFollowing($event)">
+                                      </follow-button>
+
+                                      <favorite-button
+                                        [article]="article"
+                                        (onToggle)="onToggleFavorite($event)">
+                                        {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span class="counter">({{ article.favoritesCount }})</span>
+                                      </favorite-button>
+                                    </span>-->
+                          <!--////////////////////////////////////////////////////////////////////////////-->
+                                  
+                                  
+                                  <!--
+                                  </article-meta>
+                                </div>
+                              </div>
+
+                              <div class="container page">
+
+                                <div class="row article-content">
+                                  <div class="col-md-12">
+
+                                    <div [innerHTML]="article.body | markdown"></div>
+                                    
+                                    <div>
+                                      <img style="width:100%; height:''" class="thumbnail" src="{{article.postImage}}">
+                                    </div>
+
+
+                                    -->
+                         <!--//////////////////////////////////////////////////////////////////////////////////////-->
+                                    <!--<video id="1" class="video-js vjs-default-skin vjs-big-play-centered"
+                                    controls preload="auto" width="640" height="264"
+                                    poster="http://video-js.zencoder.com/oceans-clip.png"
+                                    data-setup='{"example_option":true}'>
+                                   <source src="{{article.postVideo}}" type="video/mp4" />
+                                   <source src="{{article.postVideo}}" type="video/webm" />
+                                   <source src="{{article.postVideo}}" type="video/ogg" />
+                                   <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                                  </video>
+                                  controls style="margin-left:10%;margin-right:10%;margin-top:20px;width:'';height:''"
+                                  
+                                  <video [hidden]="!article.postVideo" controls="controls" style="margin-left:10%;margin-right:10%;margin-top:20px;width:80%;height:''" >
+                                        <source src="{{article.postVideo}}" type="video/mp4">
+                                        <source src="{{article.postVideo}}" type="video/ogg">
+                                        <source src="{{article.postVideo}}" type="video/webm">
+                                        Your browser does not support the video tag.
+                                    </video> -->
+                                  
+           <!--////////////////////////////////////////////////////////////////////////////////////////////-->                       
+                                  
+                                  <!--
+                                  
+                                  
+                                  
+                                  <div>
+                                   
+
+                                    <vg-player>
+    <vg-overlay-play></vg-overlay-play>
+    <vg-buffering></vg-buffering>
+
+    <vg-scrub-bar>
+        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+    </vg-scrub-bar>
+
+    <vg-controls>
+        <vg-play-pause></vg-play-pause>
+        <vg-playback-button></vg-playback-button>
+
+        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+        <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+
+        <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+        <vg-track-selector></vg-track-selector>
+        <vg-mute></vg-mute>
+        <vg-volume></vg-volume>
+
+        <vg-fullscreen></vg-fullscreen>
+    </vg-controls>
+
+    <video [hidden]="!article.postVideo" [vgMedia]="media" #media id="singleVideo" preload="auto" crossorigin>
+        <source src="{{article.postVideo}}" type="video/mp4">
+        <source src="{{article.postVideo}}" type="video/ogg">
+        <source src="{{article.postVideo}}" type="video/webm">
+
+        
+    </video>
+</vg-player>
+                                  </div>
+
+                                    <ul class="tag-list">
+                                      <li *ngFor="let tag of article.tagList"
+                                        class="tag-default tag-pill tag-outline">
+                                        {{ tag }}
+                                      </li>
+                                    </ul>
+
+                                  </div>
+                                </div>
+
+                                <hr />
+
+                                <div class="article-actions">
+                                  <article-meta [article]="article">
+
+                                      <span [hidden]="!canModify">
+                                      <a style="color:black;" class="btn btn-sm btn-outline-secondary"
+                                        [routerLink]="['/editor', article.slug]">
+                                        <i class="ion-edit"></i> Edit Article
+                                      </a>
+
+                                      <button class="btn btn-sm btn-outline-danger"
+                                        [ngClass]="{disabled: isDeleting}"
+                                        (click)="deleteArticle()">
+                                        <i class="ion-trash-a"></i> Delete Article
+                                      </button>
+                                    </span>
+
+                                    <span [hidden]="canModify">
+                                      <follow-button
+                                        [profile]="article.author"
+                                        (onToggle)="onToggleFollowing($event)">
+                                      </follow-button>
+
+                                      <favorite-button
+                                        [article]="article"
+                                        (onToggle)="onToggleFavorite($event)">
+                                        {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span class="counter">({{ article.favoritesCount }})</span>
+                                      </favorite-button>
+                                    </span>
+
+                                  </article-meta>
+                                </div>
+
+                                <div class="row">
+                                  <div class="col-xs-12 col-md-8 offset-md-2">
+
+                                    <div *showAuthed="true">
+                                      <list-errors [errors]="commentFormErrors"></list-errors>
+                                      <form class="card comment-form" (ngSubmit)="addComment()">
+                                        <fieldset [disabled]="isSubmitting">
+                                          <div class="card-block">
+                                            <textarea class="form-control"
+                                              placeholder="Write a comment..."
+                                              rows="3"
+                                              [formControl]="commentControl"
+                                            ></textarea>
+                                          </div>
+                                          <div class="card-footer">
+                                            <img src="{{currentUser.image}}" class="comment-author-img" />
+                                            <button class="btn btn-sm btn-primary" type="submit">
+                                            Post Comment
+                                            </button>
+                                          </div>
+                                        </fieldset>
+                                      </form>
+                                    </div>
+
+                                    <div *showAuthed="false">
+                                      <a style="color:mediumblue;" [routerLink]="['/login']">Sign in</a> or <a style="color:mediumblue;" [routerLink]="['/register']">sign up</a> to add comments on this article.
+                                    </div>
+
+                                    <article-comment
+                                      *ngFor="let comment of comments"
+                                      [comment]="comment"
+                                      (deleteComment)="onDeleteComment(comment)">
+                                    </article-comment>
+
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          
+                          
+                    -->      
+                          
+          <!--//////////////////////////////////////////////////////////////////////////////////////////////-->       
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          <!--</div>
+      
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+      
+      
+        </div>
+    </div>
+</div>-->
+
+
+
+
+
+<!-- Trigger the modal with a button -->
+<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+-->
+<!-- Modal -->
+<!--<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+  -->
+    <!-- Modal content-->
+    <!--<div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<img [src]="currentUser.image" class="comment-author-img" />
+
+width="320" height="240"
+-->
+
+
+
+
+
+
+
+<div class="modal-header" style="">
+      <h4 class="modal-title pull-left">More of {{title}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" style="color:black;" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+    <!--<div class="modal-body">
+      <ul *ngIf="list.length">
+        <li *ngFor="let item of list">{{item}}</li>
+      </ul>
+    </div>
+    <div class="modal-body">
+      <p>{{ article.title }}</p>
+      <p>{{ article.description }}</p>
+    </div>  margin:-25px;padding-top:120px;margin-top:0px;-->
+    <!--/////////////////////////background-color:#321C10////////////////////-->
+
+<div class="article-page modal-body" style="">
+
+<div class="banner modal-body" style="margin:-15px;margin-top:-15px;background-color:#FB0F5A;">
+<div class="container">
+  <h1 class="page modal-body" style="overflow:none;">{{ article.title }}</h1>
+
+  <article-meta [article]="article" (click)="bsModalRef.hide()">
+  
+   <span [hidden]="!canModify">
+      <a [hidden]="article.postVideo"
+        class="btn btn-sm btn-outline-secondary"
+        [routerLink]="['/editor', article.slug]">
+        <i class="ion-edit"></i>
+      </a>
+
+      <a [hidden]="!article.postVideo"
+        class="btn btn-sm btn-outline-secondary"
+        [routerLink]="['/editorv', article.slug]">
+        <i class="ion-edit"></i>
+      </a>
+
+      <button class="btn btn-sm btn-outline-danger"
+        [ngClass]="{disabled: isDeleting}"
+        (click)="deleteArticle()">
+        <i class="ion-trash-a"></i>
+      </button>
+    </span>
+    <span [hidden]="canModify">
+        <follow-button
+          [profile]="article.author"
+          (onToggle)="onToggleFollowing($event)"
+          (click)="bsModalRef.hide()">
+        </follow-button>
+
+        <favorite-button
+          (click)="bsModalRef.hide()"
+          [article]="article"
+          (onToggle)="onToggleFavorite($event)">
+          <!--{{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article--> <span class="counter">({{ article.favoritesCount }})</span>
+        </favorite-button>
+    </span>
+  </article-meta>
+ </div>
+</div>
+   <div class="modal-body" style="margin:-30px;">
+     <img style="width:100%;" class="thumbnail" src="{{article.postImage}}">
+     <img style="width:100%;" class="thumbnail" src="{{article.postImage1}}">
+
+     <!--<video style="width:100%;margin-top:-9px;" [hidden]="!article.postVideo" preload="auto" controls crossorigin>
+      <source src="{{article.postVideo}}" type="video/mp4">
+      <source src="{{article.postVideo}}" type="video/ogg">
+      <source src="{{article.postVideo}}" type="video/webm">
+     </video>-->
+     <vg-player [hidden]="!article.postVideo" style="margin-top:-9px; ">
+      <vg-overlay-play></vg-overlay-play>
+      <vg-buffering></vg-buffering>
+
+      <vg-scrub-bar>
+      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+      <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+      </vg-scrub-bar>
+
+      <vg-controls [vgAutohide]="true" [vgAutohideTime]="1.5">
+      <vg-play-pause></vg-play-pause>
+      <vg-playback-button></vg-playback-button>
+
+      <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+      <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+
+      <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+      <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+      <!--<vg-track-selector></vg-track-selector>-->
+      <vg-mute></vg-mute>
+      <vg-volume></vg-volume>
+
+      <vg-fullscreen></vg-fullscreen>
+      </vg-controls>
+      <!--/////[vgMedia]="media" #media id="singleVideo"-->
+
+      <video style="width:100%;" [hidden]="!article.postVideo" [vgMedia]="media" #media id="singleVideo" preload="auto" crossorigin>
+      <source src="{{article.postVideo}}" type="video/mp4">
+      <source src="{{article.postVideo}}" type="video/ogg">
+      <source src="{{article.postVideo}}" type="video/webm">
+      </video>-->
+      </vg-player>
+   </div>
+
+    <div class="" style="">
+
+    <div class="row article-content">
+    <div class="col-md-12">
+
+    <div class="page modal-body" [innerHTML]="article.body | markdown"></div>
+
+    <!--<div style="width:100%;" class="modal-body">
+      <img style="width:100%;" class="thumbnail" src="{{article.postImage}}">
+    </div>
+    <div style="width:100%;" class="modal-body">
+      <img style="width:100%;" class="thumbnail" src="{{article.postImage1}}">
+    </div>-->
+
+    <!--///////////container/////////////margin:-15px;/////////////////////-->
+
+    <!--/////////////////////////////////////////////-->
+
+
+<div>
+
+
+<!--<vg-player>
+<vg-overlay-play></vg-overlay-play>
+<vg-buffering></vg-buffering>
+
+<vg-scrub-bar>
+<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+<vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+</vg-scrub-bar>
+
+<vg-controls>
+<vg-play-pause></vg-play-pause>
+<vg-playback-button></vg-playback-button>
+
+<vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+<vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+
+<vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+<vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+<vg-track-selector></vg-track-selector>
+<vg-mute></vg-mute>
+<vg-volume></vg-volume>
+
+<vg-fullscreen></vg-fullscreen>
+</vg-controls>/////[vgMedia]="media" #media id="singleVideo"-->
+
+<!--<video style="width:100%; height:''" [hidden]="!article.postVideo" preload="auto" controls crossorigin>
+<source src="{{article.postVideo}}" type="video/mp4">
+<source src="{{article.postVideo}}" type="video/ogg">
+<source src="{{article.postVideo}}" type="video/webm">
+</video>-->
+<!--</vg-player>-->
+</div>
+
+<div class="modal-body">
+    <ul class="tag-list">
+        <li *ngFor="let tag of article.tagList"
+          class="tag-default tag-pill tag-outline">
+          {{ tag }}
+        </li>
+    </ul>
+</div>
+
+</div>
+</div>
+
+<hr />
+
+<div class="article-actions">
+<article-meta [article]="article" (click)="bsModalRef.hide()">
+
+<span [hidden]="!canModify">
+<a [hidden]="article.postVideo"
+   style="color:black;" 
+   class="btn btn-sm btn-outline-secondary"
+   [routerLink]="['/editor', article.slug]">
+  <i class="ion-edit"></i>
+</a>
+
+      <a [hidden]="!article.postVideo"
+        class="btn btn-sm btn-outline-secondary"
+        [routerLink]="['/editorv', article.slug]">
+        <i class="ion-edit"></i>
+      </a>
+
+<button class="btn btn-sm btn-outline-danger"
+  [ngClass]="{disabled: isDeleting}"
+  (click)="deleteArticle()">
+  <i class="ion-trash-a"></i>
+</button>
+</span>
+
+<span [hidden]="canModify">
+<follow-button
+  [profile]="article.author"
+  (onToggle)="onToggleFollowing($event)"
+  (click)="bsModalRef.hide()">
+</follow-button>
+
+<favorite-button
+  (click)="bsModalRef.hide()"
+  [article]="article"
+  (onToggle)="onToggleFavorite($event)">
+  <!--{{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article--> <span class="counter">({{ article.favoritesCount }})</span>
+</favorite-button>
+</span>
+
+</article-meta>
+</div>
+
+<div class="row">
+<div class="col-xs-12 col-md-8 offset-md-2">
+
+<div *showAuthed="true">
+<list-errors [errors]="commentFormErrors"></list-errors>
+<form class="card comment-form" (ngSubmit)="addComment()">
+  <fieldset [disabled]="isSubmitting">
+    <div class="card-block">
+      <textarea class="form-control"
+        placeholder="Write a comment..."
+        rows="3"
+        [formControl]="commentControl"
+      ></textarea>
+    </div>
+    <div class="card-footer">
+      <img src="{{currentUser.image}}" class="comment-author-img" />
+      <button [disabled]="!commentControl.value" class="btn btn-sm btn-primary" type="submit">
+      Post Comment
+      </button>
+    </div>
+  </fieldset>
+</form>
+</div>
+
+<div *showAuthed="false">
+<a style="color:mediumblue;" [routerLink]="['/login']" (click)="bsModalRef.hide()">Sign in</a> or <a style="color:mediumblue;" [routerLink]="['/register']" (click)="bsModalRef.hide()">sign up</a> to add comments on this article.
+</div>
+
+<article-comment
+*ngFor="let comment of comments"
+[comment]="comment"
+(deleteComment)="onDeleteComment(comment)">
+</article-comment>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<!--////////////////////////////////////////////-->
+<div>
+  <!--<p>{{currentUser}}</p>-->
+  <!--<p>{{article.slug}}</p>-->
+</div>
+
+
+<!--/////////////////////////////////////////////-->
+    
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+</div>
+
+
+<!--///original bizarticle-banner-color:#4C5053 //testing colors from tumblr//#095B2B//#F2992E//#36465D//#A77DC2//#56BC8A//#529FCD///#D95E3F///#F88B9F//#FEA3B8/////-->

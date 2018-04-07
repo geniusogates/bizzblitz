@@ -1,0 +1,43 @@
+<div class="article-preview">
+  <landarticle-meta [landarticle]="landarticle">
+    <landfavorite-button
+      [landarticle]="landarticle"
+      (onToggle)="onToggleFavorite($event)"
+      class="pull-xs-right">
+      {{landarticle.favoritesCount}}
+    </landfavorite-button>
+  </landarticle-meta>
+
+  <a (click)="openModalWithComponent()" class="preview-link">
+    <h1>{{ landarticle.title }}</h1>
+    <h6><span style="color:black;font-size:20px"><strong>Location:</strong></span> {{ landarticle.location }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Item:</strong></span> {{ landarticle.name1 }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Desc:</strong></span> {{ landarticle.description1 }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Price:</strong></span> {{ landarticle.price1 }}</h6>
+    <div>
+      <!--<p>{{ bizarticle.description1 }}</p> [routerLink]="['/bizarticle', bizarticle.slug]"-->
+      <img style="width:100%; background-color:white;" class="thumbnail" src="{{landarticle.postImage}}">
+    </div>
+    <!--<div>
+      p>{{ bizarticle.description1 }}</p>->
+      <img style="width:100%; background-color:white;" class="thumbnail" src="{{bizarticle.postImage1}}">
+    </div>-->
+    
+    <span>Read more...</span>
+    <ul class="tag-list">
+      <li class="tag-default tag-pill tag-outline"
+        *ngFor="let tag of landarticle.tagList">
+        {{ tag }}
+      </li>
+    </ul>
+  </a>
+</div>
+
+
+<!--<p>{{ article.description }}</p>-->
+<!--<p>{{ listing.description }}</p>
+ <hr /> -->
+
+
+
+<!--<img [src]="comment.author.image" class="comment-author-img" />-->

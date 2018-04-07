@@ -1,0 +1,121 @@
+<div class="home-page">
+    
+      <div class="banner" *showAuthed="false" style="background-color:#FF0090; padding-top:100px;margin:-15px;">
+        <div class="container">
+          <h1 class="logo-font">BizzChat</h1>
+          <p>Chat as your business grow!! on <i>BizzChat</i> Compare prices across businesses.</p>
+        </div>
+      </div>
+    
+      <div class="container page">
+        <div class="row" style="margin:-30px; margin-top:25px;">
+    
+          <div class="col-md-3" style="padding-top:0px;margin-top:20px;">
+            <!--<div class="sidebar">
+                <!-<p><i>Shouts Info</i></p>->
+             
+            </div>-->
+          </div>
+    
+          <div class="col-md-6" style="padding-top:0px;margin-top:20px;">
+            <div class="bizfeed-toggle">
+              <ul class="nav nav-pills outline-active">
+                <li class="nav-item">
+                  <a class="nav-link"
+                     [ngClass]="{'active': shoutListConfig.type === 'shoutfeed'}"
+                     (click)="setShoutListTo('shoutfeed')">
+                     <span style="font-weight:bolder;color:deeppink;">Following Shout-Outs</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"
+                     [ngClass]="{'active': shoutListConfig.type === 'all' && !shoutListConfig.filters.tag}"
+                     (click)="setShoutListTo('all')">
+                     <span style="font-weight:bolder;color:deeppink;">Global Shout-outs,</span>
+                  </a>
+                </li>
+                <li class="nav-item" [hidden]="!shoutListConfig.filters.tag">
+                  <a class="nav-link active">
+                    <i class="ion-pound"></i> {{ shoutListConfig.filters.tag }}
+                  </a>
+                </li>
+
+                
+                <li class="nav-item">
+                  <a class="nav-link"
+                  [routerLink]="['/bizhome']">
+                  <i style="color:black;" class="fa fa-shopping-bag" aria-hidden="true"></i><span style="font-weight:bolder;color:black;">Bizz World</span>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link"
+                  [routerLink]="['/carhome']">
+                    <i style="color:black;" class="fa fa-car" aria-hidden="true"></i><span style="font-weight:bolder;color:orangered;">Find Cars</span>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link"
+                  [routerLink]="['/apathome']">
+                    <i style="color:black;" class="fa fa-building" aria-hidden="true"></i><span style="font-weight:bolder;color:dodgerblue;">Find Apartments/Rentals</span>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link"
+                  [routerLink]="['/landhome']">
+                    <i style="color:black;" class="fa fa-map" aria-hidden="true"></i><span style="font-weight:bolder;color:maroon;">Find Land</span>
+                  </a>
+              </li>
+
+            <li class="nav-item">
+              <a class="nav-link"
+              [routerLink]="['']">
+              <i style="color:black;" class="fa fa-home" aria-hidden="true"></i><span style="font-weight:bolder;color:blue;">Home</span>
+              </a>
+          </li>
+
+                <!--<li class="nav-item">
+                  <a class="nav-link"
+                  [routerLink]="['']">
+                  <span style="font-weight:bolder;color:blue;">Home</span>
+                  </a>
+              </li>-->
+
+
+                
+              </ul>
+            </div>
+    
+            <shoutarticle-list [limit]="50" [config]="shoutListConfig"></shoutarticle-list>
+            
+          </div>
+    
+          <div class="col-md-3" style="padding-top:0px;margin-top:20px;">
+           <!-- <div class="sidebar">
+                <p><i>Top Shouts</i></p>-->
+    
+              <!--<div class="tag-list">
+                <a href="#"
+                   *ngFor="let shouttag of tags"
+                   (click)="setShoutListTo('all', {tag: shouttag})"
+                   class="tag-default tag-pill">
+                   {{ tag }}
+                </a>
+              </div>
+    
+              <div [hidden]="tagsLoaded">
+                Loading tags...
+              </div>
+    
+              <div [hidden]="!tagsLoaded || tags.length">
+                No tags are here... yet.
+              </div>
+            </div>-->
+          </div>
+    
+        </div>
+      </div>
+    </div>
+    

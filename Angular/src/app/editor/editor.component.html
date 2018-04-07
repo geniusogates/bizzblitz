@@ -1,0 +1,246 @@
+<div class="editor-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+
+        <h3 style="padding-top:0px;margin-top:120px;">Proceed to post with image or click <a href="/editorv" style="color:blue;">here to post with Video.</a></h3>
+          
+
+        <list-errors [errors]="errors"></list-errors>
+
+        <form [formGroup]="articleForm" >
+          <fieldset [disabled]="isSubmitting">
+
+            <fieldset class="form-group">
+              <label>Title(optional):</label>
+              <input class="form-control form-control-lg"
+                formControlName="title"
+                type="text"
+                placeholder="Title" />
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Description(optional):</label>
+              <input class="form-control"
+                formControlName="description" 
+                type="text"
+                placeholder="What's this article about? description" />
+            </fieldset>
+
+            <!--<fieldset class="form-group">
+              <input class="form-control" name="description" [(ngModel)]="description"
+                type="text"
+                placeholder="URL of post picture"
+                formControlName="postImage" />
+            </fieldset>-->
+            <!--<fieldset class="form-group">
+              <div><h2>Add Pic:</h2></div>
+              <input id="image" class="form-control"
+                formControlName="image" name="image" [(ngModel)]="image"
+                type="file"
+               />
+            </fieldset>-->
+
+            <fieldset class="form-group">
+              <label>Main Body(optional):</label>
+              <textarea class="form-control"
+                formControlName="body"
+                rows="8"
+                placeholder="Main body">
+              </textarea>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Enter Tags(optional):</label>
+              <input class="form-control"
+                type="text"
+                placeholder="Enter tags"
+                [formControl]="tagField"
+                (keyup.enter)="addTag()" />
+
+              <div class="tag-list">
+                <span *ngFor="let tag of article.tagList"
+                  class="tag-default tag-pill">
+                  <i class="ion-close-round" (click)="removeTag(tag)"></i>
+                  {{ tag }}
+                </span>
+              </div>
+            </fieldset>
+              <h5 style="color:black;">+Add Image 1:</h5>
+                  <form ngNoForm>
+                    <input id="file" name="file" type="file" >
+                    <button style="margin-top:10px;" (click)="uploadf()" type="button">Upload</button>
+                  </form>
+                  <div [hidden]="uploadComplete" style="color:blue;"><h6>{{uploadStarted}}</h6></div>
+                  <div style="color:green;"><h6>{{uploadComplete}}</h6></div>
+                  <div [hidden]="!image" style="overflow:hidden;">
+                    <div style="position:relative;width:100px;height:100px;float:left;display:flex;justify-content:center;align-items:center;">
+                      <img [src]="image" style="max-width:100px;max-height:100px;">
+                      <!--<button (click)="deletef()" style="position:absolute;top:2px;right:2px;">[x]</button>-->
+                    </div>
+                  </div>
+            <!--<h5 style="color:black;">+Add Image 1:</h5>
+
+            <fieldset class="form-group">
+                
+                                 <!-<!-INPUT FOR IMAGE UPLOADING postImage////class="form-control"->
+                         
+                                  <input type="file" class="form-control" style="border: dotted 3px blue;"
+                                  id=image
+                                  ngFileSelect
+                                  [options]="options"
+                                  (onUpload)="handleUpload($event)"
+                                  (beforeUpload)="beforeUpload($event)">
+                                  <p>Please, wait for image to appear before u hit 'Publish' button, may take a few seconds depending on your internet..</p>
+                                  ->
+                                  <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
+                                  <button style="margin-top:10px;" (click)="upload()">Upload</button>
+                                  <!-Response: {{uploadFile}}->
+                                  <div [hidden]="uploadComplete" style="color:blue;"><h6>{{uploadStarted}}</h6></div>
+                                  <div style="color:green;"><h6>{{uploadComplete}}</h6></div>
+                                  <div>
+                                      <cl-image width="300" height="200"  class="thumbnail" [public-id]="imageId" [cloud-name]="uploader.cloudName"></cl-image>
+                                      <!-<img style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" src="{{uploadFile.image}}">->
+                                   
+                                  </div>
+                
+                                </fieldset>-->
+                                <!--///////////////////////////////////////////////////////////////-->
+                                        
+            <!--//////////////////////////////////////////////////////////////-->
+                     <button style="margin-top:10px; margin-bottom:5px;" type="button" class="btn btn-primary" (click)="toggleImage()">+Add Image 2</button>
+            <!--//////////////////////////////////////////////////////////////-->
+            <div *ngIf=isAddImage>
+            <fieldset class="form-group">
+
+
+                  <form ngNoForm>
+                    <input id="file2" name="file" type="file" >
+                    <button style="margin-top:10px;" (click)="uploadf2()" type="button">Upload</button>
+                  </form>
+                  <div [hidden]="uploadComplete2" style="color:blue;"><h6>{{uploadStarted2}}</h6></div>
+                  <div style="color:green;"><h6>{{uploadComplete2}}</h6></div>
+                  <div [hidden]="!image2" style="overflow:hidden;">
+                    <div style="position:relative;width:100px;height:100px;float:left;display:flex;justify-content:center;align-items:center;">
+                      <img [src]="image2" style="max-width:100px;max-height:100px;">
+                      <!--<button (click)="deletef()" style="position:absolute;top:2px;right:2px;">[x]</button>-->
+                    </div>
+                  </div>
+                
+                                 <!--INPUT FOR IMAGE UPLOADING postImage-->
+                                  
+                                  <!--<input type="file" style="border: dotted 3px red;" class="form-control"
+                                  id=image
+                                  ngFileSelect
+                                  [options]="options1"
+                                  (onUpload)="handleUpload1($event)"
+                                  (beforeUpload)="beforeUpload1($event)">
+                                  <p>Please, wait for image to appear before u hit 'Publish' button, may take a few seconds depending on your internet..</p>
+                                  -->
+
+                                  <!--<input type="file" ng2FileSelect [uploader]="uploader2" accept="image/*;capture=camera">
+                                  <button style="margin-top:10px;" (click)="upload2()">Upload</button>
+                                  <!-Response: {{uploadFile2}}->
+                                  <div [hidden]="uploadComplete2" style="color:blue;"><h6>{{uploadStarted2}}</h6></div>
+                                  <div style="color:green;"><h6>{{uploadComplete2}}</h6></div>
+                                  <div>
+                                      <cl-image width="300" height="200"  class="thumbnail" [public-id]="imageId2" [cloud-name]="uploader2.cloudName"></cl-image>
+                                      <!-<img style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" src="{{uploadFile2}}">->
+                                   
+                                  </div>-->
+                
+            </fieldset>
+            </div>
+                                <!--<div>
+                                Response: {{ uploadFile | json }}
+                                </div>
+                                <div>
+                                Response: {{ uploadFile1 | json }}
+                                </div>-->
+            <!--/////////////////////////////////////////////////////////////-->
+                           
+                
+                            
+
+                            <!--////////////////////////////////////////////////////////-->
+                            
+                            <!--///////////////////////////////////////////////////////-->
+                            <!--<cl-image public-id="sample" cloud-name="demo"></cl-image>-->
+                            <!--<cl-image public-id="image_id" cloud-name="dkacztgxr"></cl-image>-->
+                            
+                            
+                            <fieldset hidden class="form-group">
+                              <input class="form-control"
+                                type="text"
+                                value="{{uploadFile}}"
+                                name = "postImage"
+                                name="image" [(ngModel)]="image"
+                                
+                                formControlName="postImage" />
+                            </fieldset>
+                            <!--///////////////////////////////////////////////////////-->
+                            <fieldset hidden class="form-group">
+                              <input class="form-control"
+                                type="text"
+                                value="{{uploadFile2}}"
+                                name = "postImage1"
+                                name="image2" [(ngModel)]="image2"
+                                
+                                formControlName="postImage1" />
+                            </fieldset>
+                            <!--//////////////////////////////////////////////////////-->
+
+
+
+            <button style="margin-top:15px;" class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+              Publish Article
+            </button>
+
+          </fieldset>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!--
+<div class="container">
+<div class="card">
+                <div class="card-header">
+                  Firebase Cloud Storage With Angular
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Select a file for upload:</h5>
+                  <input type="file" (change)="uploadf($event)" accept=".png,.jpg" />
+                  <br><br>
+                  <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
+                              File uploaded: <a [href]="downloadSrc">{{downloadSrc}}</a>
+                                <form>
+                                <input value="downloadSrc" name="fireimage" [(ngModel)]="fireimage">
+                                </form>
+                            </div>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="btn-group" role="group" *ngIf="uploadState | async; let state">
+                    <button type="button" class="btn btn-primary" (click)="task.pause()" [disabled]="state === 'paused'">Pause</button>
+                    <button type="button" class="btn btn-primary" (click)="task.cancel()" [disabled]="!(state === 'paused' || state ==='running')">Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="task.resume()" [disabled]="state === 'running'">Resume</button>
+                  </div>
+                  <br><br>
+                  
+                </div>
+            </div>
+</div>
+
+-->

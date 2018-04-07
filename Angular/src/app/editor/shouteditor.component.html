@@ -1,0 +1,143 @@
+
+
+<div class="editor-page">
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-10 offset-md-1 col-xs-12">
+  
+          <list-errors [errors]="errors"></list-errors>
+  
+          <form [formGroup]="shoutarticleForm" style="padding-top:0px;margin-top:120px;">
+            <fieldset [disabled]="isSubmitting">
+  
+              <fieldset class="form-group">
+                <input class="form-control form-control-lg"
+                  formControlName="shoutname"
+                  type="text"
+                  placeholder="Your Shout-Out" />
+              </fieldset>
+              <fieldset class="form-group">
+                  <input class="form-control form-control-lg"
+                    formControlName="shoutdescription"
+                    type="text"
+                    placeholder="Describe Your Shout-Out" />
+                </fieldset>
+
+              <fieldset class="form-group">
+                <input class="form-control form-control-lg"
+                  formControlName="shoutlocation"
+                  type="text"
+                  placeholder="Your Location" />
+              </fieldset>
+              <fieldset class="form-group">
+                  <input class="form-control form-control-lg"
+                    formControlName="shoutphone"
+                    type="text"
+                    placeholder="Your Phone Number" />
+                </fieldset>
+                <fieldset class="form-group">
+                  <input class="form-control form-control-lg"
+                    formControlName="shoutemail"
+                    type="text"
+                    placeholder="Your Email Address" />
+                </fieldset>
+  
+              
+  
+              <fieldset hidden class="form-group">
+                <input class="form-control"
+                  type="text"
+                  placeholder= "url of shoutimage"
+                  formControlName="shoutimage" />
+              </fieldset>
+              <!--<fieldset class="form-group">
+                <div><h2>Add Pic:</h2></div>placeholder="URL of Shout-Out image"
+                <input id="image" class="form-control"
+                  formControlName="image" name="image" [(ngModel)]="image"
+                  type="file"
+                 /> name = "postImage"
+              </fieldset>-->
+  
+              <!--<fieldset class="form-group">
+                <textarea class="form-control"
+                  formControlName="shoutbody"
+                  rows="8"
+                  placeholder="What is in your mind?(in markdown)">
+                </textarea>
+              </fieldset>-->
+  
+              <!--<fieldset class="form-group">
+                <input class="form-control"
+                  type="text"
+                  placeholder="Enter tags"
+                  [formControl]="tagField"
+                  (keyup.enter)="addTag()" />
+  
+                <div class="tag-list">
+                  <span *ngFor="let tag of article.tagList"
+                    class="tag-default tag-pill">
+                    <i class="ion-close-round" (click)="removeTag(tag)"></i>
+                    {{ tag }}
+                  </span>
+                </div>
+              </fieldset>-->
+
+
+              <p>Choose an image below:</p>
+              <fieldset class="form-group">
+                  
+                                   <!--INPUT FOR IMAGE UPLOADING postImage-->
+                           
+                                    <!--<input type="file" class="form-control"
+                                    id=image
+                                    ngFileSelect
+                                    [options]="options"
+                                    (onUpload)="handleUpload($event)"
+                                    (beforeUpload)="beforeUpload($event)">
+                                    <p>Please, wait for image to appear before u hit 'Publish' button, may take a few seconds depending on your internet..</p>
+                                    -->
+                                    <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
+                                    <button style="margin-top:10px;" (click)="upload()">Upload</button>
+                                    <!--Response: {{uploadFile}}-->
+                                    <div [hidden]="uploadComplete" style="color:blue;"><h6>{{uploadStarted}}</h6></div>
+                                    <div style="color:green;"><h6>{{uploadComplete}}</h6></div>
+                  
+                                    
+                  
+                              </fieldset>
+                              <div>
+                                <cl-image width="300" height="200"  class="thumbnail" [public-id]="imageId" [cloud-name]="uploader.cloudName"></cl-image>
+                                  <!--<img style="width:80%; height:700px; margin-left:10%; margin-right:10%;" class="thumbnail" src="http://localhost:3000/images/{{uploadFile.image}}">-->
+                                  <!--<img style="width:80%; height:700px; margin-left:10%; margin-right:10%;" class="thumbnail" src="http://localhost:3000/images/file-1505346834344.jpg">-->
+                                  <!--<img style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" src="{{uploadFile.image}}">-->
+                              </div>
+                             
+                  
+                              <fieldset hidden class="form-group">
+                                <input class="form-control"
+                                  type="text"
+                                  value="{{uploadFile}}"
+                                  name = "shoutimage"
+                                  name="image" [(ngModel)]="image"
+                                  
+                                  formControlName="shoutimage" />
+                              </fieldset>
+
+              
+  
+              <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+                Publish Shout-Out
+              </button>
+  
+            </fieldset>
+          </form>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+                  
+  

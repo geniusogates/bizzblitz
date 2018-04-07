@@ -1,0 +1,36 @@
+<div class="article-preview">
+    <shoutarticle-meta [shoutarticle]="shoutarticle">
+      <shoutfavorite-button
+        [shoutarticle]="shoutarticle"
+        (onToggle)="onToggleFavorite($event)"
+        class="pull-xs-right">
+        {{shoutarticle.favoritesCount}}
+      </shoutfavorite-button>
+    </shoutarticle-meta>
+  
+    <a (click)="openModalWithComponent()" class="preview-link">
+      <h1>{{ shoutarticle.shoutname }}</h1>
+      <h6>Location: {{ shoutarticle.shoutlocation }}</h6>
+      <div>
+        <p style="color:black; font-style:italic">{{ shoutarticle.shoutdescription }}</p>
+        <img style="width:100%; background-color:white;" class="thumbnail" src="{{shoutarticle.shoutimage}}">
+      </div>
+      
+      <span>Read more...</span>
+      <ul class="tag-list">
+        <li class="tag-default tag-pill tag-outline"
+          *ngFor="let tag of shoutarticle.tagList">
+          {{ tag }}
+        </li>
+      </ul>
+    </a>
+  </div>
+  
+  
+  <!--<p>{{ article.description }}</p>-->
+  <!--<p>{{ listing.description }}</p>
+   <hr /> -->
+  
+  
+  
+  <!--<img [src]="comment.author.image" class="comment-author-img" />-->

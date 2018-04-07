@@ -1,0 +1,21 @@
+<div class="article-meta">
+    <a [routerLink]="['/profile', shoutarticle.author.username]">
+      <img src="{{shoutarticle.author.image}}" />
+    </a>
+  
+    <div class="info">
+      <a class="author"
+        [routerLink]="['/profile', shoutarticle.author.username]">
+        {{ shoutarticle.author.username }}
+      </a>
+      <span class="date" style="color:lightseagreen">
+        {{ shoutarticle.createdAt | date: 'longDate' }}
+      </span>
+    </div>
+  
+    <ng-content></ng-content>
+  </div>
+
+  <!--
+     <img [src]="shoutarticle.author.image" />
+  -->

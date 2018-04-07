@@ -1,0 +1,63 @@
+<div class="article-preview">
+  <cararticle-meta [cararticle]="cararticle">
+    <carfavorite-button
+      [cararticle]="cararticle"
+      (onToggle)="onToggleFavorite($event)"
+      class="pull-xs-right">
+      {{cararticle.favoritesCount}}
+    </carfavorite-button>
+  </cararticle-meta>
+
+  <a (click)="openModalWithComponent()" class="preview-link">
+    <h1>{{ cararticle.title }}</h1>
+    <h6><span style="color:black;font-size:20px"><strong>Location:</strong></span> {{ cararticle.location }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Model:</strong></span> {{ cararticle.name1 }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Desc:</strong></span> {{ cararticle.description1 }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Price:</strong></span> {{ cararticle.price1 }}</h6>
+    <!--<h6><span style="color:black;font-size:20px"><strong>Year:</strong></span> {{ cararticle.year }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Mileage:</strong></span> {{ cararticle.mileage }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Transmission:</strong></span> {{ cararticle.transmission }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>VIN:</strong></span> {{ cararticle.vin }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Condition:</strong></span> {{ cararticle.condition }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Lisense:</strong></span> {{ cararticle.lisense }}</h6>
+    <h6><span style="color:black;font-size:20px"><strong>Selling Privately?:</strong></span> {{ cararticle.privately }}</h6>-->
+    <div>
+      <!--<p>{{ bizarticle.description1 }}</p> [routerLink]="['/bizarticle', bizarticle.slug]"-->
+      <img style="width:100%; background-color:white;" class="thumbnail" src="{{cararticle.postImage}}">
+    </div>
+    <!--<div>
+
+      /*
+  price = '';
+  model = '';
+  year = '';
+  mileage = '';
+  transmission = '';
+  vin = '';
+  condition = '';
+  lisense = '';
+  privately = '';
+
+*/
+      p>{{ bizarticle.description1 }}</p>->
+      <img style="width:100%; background-color:white;" class="thumbnail" src="{{bizarticle.postImage1}}">
+    </div>-->
+    
+    <span>Read more...</span>
+    <ul class="tag-list">
+      <li class="tag-default tag-pill tag-outline"
+        *ngFor="let tag of cararticle.tagList">
+        {{ tag }}
+      </li>
+    </ul>
+  </a>
+</div>
+
+
+<!--<p>{{ article.description }}</p>-->
+<!--<p>{{ listing.description }}</p>
+ <hr /> -->
+
+
+
+<!--<img [src]="comment.author.image" class="comment-author-img" />-->

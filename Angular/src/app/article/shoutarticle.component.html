@@ -1,0 +1,167 @@
+<div class="modal-header">
+      <h4 class="modal-title pull-left">{{title}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+
+<div class="article-page modal-body">
+    
+      <div class="banner modal-body" style="margin:-15px;margin-top:-15px;background-color:#FF0090;">
+        <div class="container">
+          <h1 [hidden]="!shoutarticle.shoutname">{{ shoutarticle.shoutname }}</h1>
+          <h4 [hidden]="!shoutarticle.shoutlocation"><strong style="color:black;font-size:20px">Location: </strong><span style="font-size:15px">{{ shoutarticle.shoutlocation }}</span></h4>
+          <h4 [hidden]="!shoutarticle.shoutphone"><strong style="color:black;font-size:20px">Phone: </strong> <a style="color:white;" href="https://api.whatsapp.com/send?phone={{ shoutarticle.shoutphone }}"><span style="font-size:15px">{{ shoutarticle.shoutphone }}<i style="color:#01E675;font-size:20px;" class="fa fa-whatsapp" aria-hidden="true"></i></span></a></h4>
+          <h4 [hidden]="!shoutarticle.shoutemail"><strong style="color:black;font-size:20px">Email: </strong><span style="font-size:15px"> {{ shoutarticle.shoutemail }}</span></h4>
+    
+         <shoutarticle-meta [shoutarticle]="shoutarticle" (click)="bsModalRef.hide()">
+          
+              <span [hidden]="!canModify">
+              <a class="btn btn-sm btn-outline-secondary"
+                 [routerLink]="['/shouteditor', shoutarticle.slug]">
+                <i class="ion-edit"></i>
+              </a>
+    
+              <button class="btn btn-sm btn-outline-danger"
+                [ngClass]="{disabled: isDeleting}"
+                (click)="deleteShoutArticle()">
+                <i class="ion-trash-a"></i>
+              </button>
+            </span>
+    
+            <span [hidden]="canModify">
+              <follow-button
+                [profile]="shoutarticle.author"
+                (onToggle)="onToggleFollowing($event)">
+              </follow-button>
+    
+              <shoutfavorite-button
+                [shoutarticle]="shoutarticle"
+                (onToggle)="onToggleFavorite($event)">
+                <!--{{ shoutarticle.favorited ? 'Unfavorite' : 'Favorite' }} shout-out--> <span class="counter">({{ shoutarticle.favoritesCount }})</span>
+              </shoutfavorite-button>
+            </span>
+    
+         </shoutarticle-meta>
+        </div>
+        <!--<div class="container">
+          <p>{{ bizarticle.description }}</p>
+          <img style="width:20%;height:250px; background-color:white;" class="thumbnail" src="{{bizarticle.postImage}}">
+        </div>
+      style="padding-top:0px;margin-top:120px;"
+      -->
+      </div>
+
+      
+             
+            <div class="modal-body" style="margin:-30px;">
+                <img style="width:100%; background-color:white;" class="thumbnail" src="{{shoutarticle.shoutimage}}">
+            </div> 
+    
+      <div class="container page">
+    
+        <div class="row article-content">
+          <div class="col-md-12">
+    
+            <!--<div class="modal-body" [innerHTML]="shoutarticle.body | shoutmarkdown"></div>-->
+            <p class="modal-body" style="color:black">{{ shoutarticle.shoutdescription }}</p>
+                <div class="modal-body">
+                      <ul class="tag-list">
+                        <li *ngFor="let tag of shoutarticle.tagList"
+                          class="tag-default tag-pill tag-outline">
+                          {{ tag }}
+                        </li>
+                      </ul>
+                </div>
+    
+          </div>
+        </div>
+    
+        <hr />
+    
+        <div class="article-actions">
+         <shoutarticle-meta [shoutarticle]="shoutarticle" (click)="bsModalRef.hide()">
+    
+              <span [hidden]="!canModify">
+              <a class="btn btn-sm btn-outline-secondary"
+                 [routerLink]="['/shouteditor', shoutarticle.slug]">
+                <i class="ion-edit"></i>
+              </a>
+    
+              <button class="btn btn-sm btn-outline-danger"
+                [ngClass]="{disabled: isDeleting}"
+                (click)="deleteShoutArticle()">
+                <i class="ion-trash-a"></i>
+              </button>
+            </span>
+    
+            <span [hidden]="canModify">
+              <follow-button
+                [profile]="shoutarticle.author"
+                (onToggle)="onToggleFollowing($event)">
+              </follow-button>
+    
+              <shoutfavorite-button
+                [shoutarticle]="shoutarticle"
+                (onToggle)="onToggleFavorite($event)">
+                <!--{{ shoutarticle.favorited ? 'Unfavorite' : 'Favorite' }} Shoutarticle--> <span class="counter">({{ shoutarticle.favoritesCount }})</span>
+              </shoutfavorite-button>
+            </span>
+    
+          </shoutarticle-meta>
+        </div>
+    
+       
+       
+        <div class="row">
+          <div class="col-xs-12 col-md-8 offset-md-2">
+    
+            <div *showAuthed="true">
+              <list-errors [errors]="commentFormErrors"></list-errors>
+              <form class="card comment-form" (ngSubmit)="addComment()">
+                <fieldset [disabled]="isSubmitting">
+                  <div class="card-block">
+                    <textarea class="form-control"
+                      placeholder="Write a comment..."
+                      rows="3"
+                      [formControl]="commentControl"
+                    ></textarea>
+                  </div>
+                  <div class="card-footer">
+                    <img src="{{currentUser.image}}" class="comment-author-img" />
+                    <button [disabled]="!commentControl.value" class="btn btn-sm btn-primary" type="submit">
+                     Comment
+                    </button>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+    
+            <div *showAuthed="false">
+              <a style="color:mediumblue;" [routerLink]="['/login']" (click)="bsModalRef.hide()">Sign in</a> or <a style="color:mediumblue;" [routerLink]="['/register']" (click)="bsModalRef.hide()">sign up</a> to add comments on this shout-out.
+            </div>
+    
+            <shoutarticle-comment
+              *ngFor="let comment of comments"
+              [comment]="comment"
+              (deleteComment)="onDeleteComment(comment)">
+            </shoutarticle-comment>
+    
+          </div>
+        </div>
+    
+      </div>
+    </div>
+
+
+    <div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+</div>
+  
+
+    <!--
+        background-color:#4C5053
+
+       src="http://localhost:3000/images/{{shoutarticle.shoutimage}}"
+       [src]="currentUser.image"
+    -->

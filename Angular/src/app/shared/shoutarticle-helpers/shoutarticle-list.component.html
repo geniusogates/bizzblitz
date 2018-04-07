@@ -1,0 +1,38 @@
+<div class="input-group" style="padding-top:0px;margin-top:20px;">
+  <input type="text" class="form-control" placeholder="Search Shout-Outs..." [(ngModel)] = "searchTerm" name="searchTerm">
+  <span class="input-group-btn">
+    <button class="btn btn-success" type="button" (click) = "searchd()">Search</button>
+  </span>
+</div>
+
+<shoutarticle-preview
+*ngFor="let shoutarticle of results | paginate: { itemsPerPage: 10, currentPage: p }"
+[shoutarticle]="shoutarticle">
+</shoutarticle-preview>
+
+<div class="shoutarticle-preview"
+[hidden]="!loading">
+Loading shoutarticles...
+</div>
+
+<div class="shoutarticle-preview"
+[hidden]="loading || results.length">
+No shoutarticles are here... yet.
+</div>
+
+<pagination-controls (click)="scroll()" (pageChange)="p = $event" autoHide="true"></pagination-controls>
+
+<nav [hidden]="loading || totalPages <= 1">
+<ul class="pagination">
+
+  <li class="page-item"
+    [ngClass]="{'active': pageNumber === currentPage}"
+    *ngFor="let pageNumber of totalPages"
+    (click)="setPageTo(pageNumber)">
+
+    <a class="page-link" href="#">{{ pageNumber }}</a>
+
+  </li>
+
+</ul>
+</nav>

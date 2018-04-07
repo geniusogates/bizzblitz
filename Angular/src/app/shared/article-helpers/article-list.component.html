@@ -1,0 +1,92 @@
+<!--<form class="well">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Search articles..." [(ngModel)]="search" name="search" (keyup)="searchArticles()">	
+  </div>						
+</form>
+(ngModelChange) = "searchd()"
+-->
+
+<!--<modal id="custom-modal-1">
+    <div class="modal">
+        <div class="modal-body">
+            <h1>A Custom Modal!</h1>
+            <p>
+                Home page text: <input type="text" [(ngModel)]="bodyText" />
+            </p>
+            <button (click)="closeModal('custom-modal-1');">Close</button>
+        </div>
+    </div>
+    <div class="modal-background"></div>
+</modal>
+
+
+<div class="col-md-6 col-md-offset-3">
+    <h1>Home</h1>
+    <p>{{bodyText}}</p>
+    <button (click)="openModal('custom-modal-1')">Open Modal 1</button>
+    <button (click)="openModal('custom-modal-2')">Open Modal 2</button>
+</div>-->
+
+
+<!--<form class="well" style="padding-top:0px;margin-top:20px;">
+  <div class="form-group">
+    <!-<input type="text" class="form-control" placeholder="Search articles..." [(ngModel)]="search" name="search" (keyup)="searchArticles()">-
+    <input type="text" class="form-control" placeholder="Search articles..." [(ngModel)] = "searchTerm" name="searchTerm" (keyup) = "searchd()"/>
+    <!-<div *ngFor = "let article of results">{{article.title}}</div>-
+     <div *ngFor = "let article of results"></div>
+  </div>
+</form>-->
+
+<div class="input-group" style="padding-top:0px;margin-top:20px;">
+    <input (keyup.enter)="searchd()" type="text" class="form-control" placeholder="Search articles..." [(ngModel)] = "searchTerm" name="searchTerm">
+    <span class="input-group-btn">
+      <button class="btn btn-success" type="button" (click) = "searchd()">Search</button>
+    </span>
+</div>
+
+    
+
+
+<!--<form class="well" class="input-group">
+    <input [(ngModel)]="queryd" name="queryd">
+    <div *ngFor="let article of results | search:'id', 'text':queryd">{{article.title}}</div>
+</form>-->
+
+
+<article-preview
+  *ngFor="let article of results | paginate: { itemsPerPage: 10, currentPage: p }"
+  [article]="article">
+</article-preview>
+
+<div class="article-preview"
+  [hidden]="!loading">
+  Loading articles...
+</div>
+
+<div class="article-preview"
+  [hidden]="loading || results.length">
+  What? No articles are here... yet?.
+  This empty timeline won’t be around for long. Either you are not following anyone!! Start following people and you’ll see articles show up here...
+  -OR- this User has not posted anything on this timeline!!
+</div>
+
+
+<pagination-controls (click)="scroll()" (pageChange)="p = $event" autoHide="true"></pagination-controls>
+
+<!--<div class="article-preview" *ngIf="count === 0">No articles found.</div>-->
+<!--<div class="article-preview" *ngIf="article.title === 0">No articles found.</div>-->
+
+<nav [hidden]="loading || totalPages <= 1">
+  <ul class="pagination">
+
+    <li class="page-item"
+      [ngClass]="{'active': pageNumber === currentPage}"
+      *ngFor="let pageNumber of totalPages"
+      (click)="setPageTo(pageNumber)">
+
+      <a class="page-link" href="#">{{ pageNumber }}</a>
+
+    </li>
+
+  </ul>
+</nav>

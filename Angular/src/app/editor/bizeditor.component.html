@@ -1,0 +1,465 @@
+<div class="editor-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+
+        <list-errors [errors]="errors"></list-errors>
+
+        <form [formGroup]="bizarticleForm" style="padding-top:0px;margin-top:120px;">
+          <fieldset [disabled]="isSubmitting">
+
+            <fieldset class="form-group">
+              <input class="form-control form-control-lg"
+                formControlName="title"
+                type="text"
+                placeholder="Name of Your Business/Company (if any)" />
+            </fieldset>
+
+            <fieldset class="form-group">
+              <input class="form-control"
+                formControlName="description"
+                type="text"
+                placeholder="Short Business/Company Description (if any)" />
+            </fieldset>
+            <fieldset class="form-group">
+              <input class="form-control"
+                formControlName="location"
+                type="text"
+                placeholder="Your Business Location/your Location" />
+            </fieldset>
+            <fieldset class="form-group">
+              <input class="form-control"
+              formControlName="name1"
+              type="text"
+              placeholder="name of the item you are selling" />
+            </fieldset>
+            <fieldset class="form-group">
+              <input class="form-control"
+              formControlName="description1"
+              type="text"
+              placeholder="short item description" />
+            </fieldset>
+            <fieldset class="form-group">
+              <input class="form-control"
+              formControlName="price1"
+              type="text"
+              placeholder="item price-please-include a valid currency example: 'Ksh', '$' etc." />
+            </fieldset>
+            <fieldset class="form-group">
+              <input class="form-control"
+                formControlName="phone"
+                type="text"
+                placeholder="Your Phone Number" />
+            </fieldset>
+            <fieldset class="form-group">
+              <input class="form-control"
+                formControlName="email"
+                type="text"
+                placeholder="Your Email Address" />
+            </fieldset>
+
+            <fieldset hidden class="form-group">
+              <input class="form-control"
+                type="text"
+                placeholder="URL of Bizz logo picture"
+                formControlName="postImage" />
+            </fieldset>
+            <!--<fieldset class="form-group">
+              <div><h2>Add Pic:</h2></div>
+              <input id="image" class="form-control"
+                formControlName="image" name="image" [(ngModel)]="image"
+                type="file"
+               />
+            </fieldset>-->
+
+            <!--<fieldset class="form-group">
+              <textarea class="form-control"
+                formControlName="body"
+                rows="8"
+                placeholder="Describe Your Bizz and Services That You Offer">
+              </textarea>
+            </fieldset>-->
+
+            <fieldset class="form-group">
+              <input class="form-control"
+                type="text"
+                placeholder="Enter tags"
+                [formControl]="tagField"
+                (keyup.enter)="addTag()" />
+
+              <div class="tag-list">
+                <span *ngFor="let tag of bizarticle.tagList"
+                  class="tag-default tag-pill">
+                  <i class="ion-close-round" (click)="removeTag(tag)"></i>
+                  {{ tag }}
+                </span>
+              </div>
+            </fieldset>
+
+            <h5 style="color:black;">+Add Item Image 1:</h5>
+            <fieldset class="form-group">
+                
+                                 <!--INPUT FOR IMAGE UPLOADING postImage-->
+                         
+                                  <!--<input type="file" class="form-control"
+                                  id=image
+                                  ngFileSelect
+                                  [options]="options"
+                                  (onUpload)="handleUpload($event)"
+                                  (beforeUpload)="beforeUpload($event)">
+                                  <p>Please, wait for image to appear before u hit 'Post' button, may take a few seconds depending on your internet..</p>
+                                  -->
+                                  <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
+                                  <button (click)="upload()">Upload</button>
+                                  <!--Response: {{uploadFile}}-->
+                                  <div [hidden]="uploadComplete" style="color:blue;"><h6>{{uploadStarted}}</h6></div>
+                                  <div style="color:green;"><h6>{{uploadComplete}}</h6></div>
+                
+                                  
+                                  <div>
+                                    <cl-image width="300" height="200" style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" [public-id]="imageId" [cloud-name]="uploader.cloudName"></cl-image>
+
+                                    
+                                      <!--<img style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" src="{{uploadFile.image}}">-->
+                                   
+                                  </div>
+                
+            </fieldset>
+            <!--///////////////////////////////////////////////////////////////-->
+            <button type="button" class="btn btn-primary" (click)="toggleImage()">+Add Image 2</button>
+            <!--//////////////////////////////////////////////////////////////-->
+            <div *ngIf=isAddImage>
+            <fieldset class="form-group">
+                
+                                 <!--INPUT FOR IMAGE UPLOADING postImage-->
+                         
+                                  <!--<input type="file" style="border: dotted 3px blue;" class="form-control"
+                                  id=image
+                                  ngFileSelect
+                                  [options]="options1"
+                                  (onUpload)="handleUpload1($event)"
+                                  (beforeUpload)="beforeUpload1($event)">
+                                  <p>Please, wait for image to appear before u hit 'Publish' button, may take a few seconds depending on your internet..</p>
+                                  -->
+                                  <input type="file" ng2FileSelect [uploader]="uploader2" accept="image/*;capture=camera">
+                                  <button (click)="upload2()">Upload</button>
+                                  <!--Response: {{uploadFile2}}-->
+                                  <div [hidden]="uploadComplete2" style="color:blue;"><h6>{{uploadStarted2}}</h6></div>
+                                  <div style="color:green;"><h6>{{uploadComplete2}}</h6></div>
+                                  <div>
+                                    <cl-image width="300" height="200" style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" [public-id]="imageId2" [cloud-name]="uploader2.cloudName"></cl-image>
+                                      <!--<img style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" src="{{uploadFile1.image}}">-->
+                                   
+                                  </div>
+                
+            </fieldset>
+            </div>
+
+            <!--////////////////////////////////////////////////////////////////////-->
+            <button type="button" class="btn btn-primary" (click)="toggleImage1()">+Add Image 3</button>
+            <!--///////////////////////////////////////////////////////////////////-->
+            <div *ngIf=isAddImage1>
+            <fieldset class="form-group">
+                
+                                 <!--INPUT FOR IMAGE UPLOADING postImage-->
+                         
+                                  <!--<input type="file" style="border: dotted 3px green;" class="form-control"
+                                  id=image
+                                  ngFileSelect
+                                  [options]="options2"
+                                  (onUpload)="handleUpload2($event)"
+                                  (beforeUpload)="beforeUpload2($event)">
+                                  <p>Please, wait for image to appear before u hit 'Publish' button, may take a few seconds depending on your internet..</p>
+                                  -->
+                                  <input type="file" ng2FileSelect [uploader]="uploader3" accept="image/*;capture=camera">
+                                  <button (click)="upload3()">Upload</button>
+                                  <!--Response: {{uploadFile3}}-->
+                                  <div [hidden]="uploadComplete3" style="color:blue;"><h6>{{uploadStarted3}}</h6></div>
+                                  <div style="color:green;"><h6>{{uploadComplete3}}</h6></div>
+                                  <div>
+                                      <cl-image width="300" height="200" style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" [public-id]="imageId3" [cloud-name]="uploader3.cloudName"></cl-image>
+                                      <!--<img style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" src="{{uploadFile2.image}}">-->
+                                   
+                                  </div>
+                
+            </fieldset>
+            </div>
+                           
+                
+                            <fieldset hidden class="form-group">
+                              <input class="form-control"
+                                type="text"
+                                value="{{uploadFile}}"
+                                name = "postImage"
+                                name="image" [(ngModel)]="image"
+                                
+                                formControlName="postImage" />
+                            </fieldset>
+
+
+                            <fieldset hidden class="form-group">
+                              <input class="form-control"
+                                type="text"
+                                value="{{uploadFile2}}"
+                                name = "postImage"
+                                name="image2" [(ngModel)]="image2"
+                                
+                                formControlName="postImage1" />
+                            </fieldset>
+
+
+                            <fieldset hidden class="form-group">
+                              <input class="form-control"
+                                type="text"
+                                value="{{uploadFile3}}"
+                                name = "postImage"
+                                name="image3" [(ngModel)]="image3"
+                                
+                                formControlName="postImage2" />
+                            </fieldset>
+
+                                <!--<div>
+                                Response: {{ uploadFile | json }}
+                                </div>
+                                <div>
+                                Response: {{ uploadFile1 | json }}
+                                </div>
+                                <div>
+                                Response: {{ uploadFile2 | json }}
+                                </div>-->
+
+            
+
+
+          <!--
+            <table class="table table-bordered table-striped table-hover table-condensed">
+              <thead>
+              <tr>
+                <th>ITEMS</th>
+                <th>ITEMS DESCRIPTION</th>
+                <th>ITEM IMAGE</th>
+                <th>Item Price</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                
+                <tr>
+                  <td>
+                      Item 1:
+                      <fieldset class="form-group">
+                        <input class="form-control form-control-lg"
+                        formControlName="name1"
+                        type="text"
+                        placeholder="name" />
+                      </fieldset>
+                  </td>
+                  <td>
+                      Item 1 Description:
+                      <fieldset class="form-group">
+                        <input class="form-control form-control-lg"
+                        formControlName="description1"
+                        type="text"
+                        placeholder="description" />
+                      </fieldset>
+                  </td>
+                  <td>
+                     Item 1 Image:
+                     <fieldset class="form-group">
+                        <input class="form-control form-control-lg"
+                        formControlName="image1"
+                        type="text"
+                        placeholder="imageurl" />
+                     </fieldset>
+                  </td>
+                  <td>
+                    Item 1 Price:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="price1"
+                      type="number"
+                      placeholder="" />
+                    </fieldset>
+                  </td>
+                </tr>
+                
+                
+
+                
+                <tr>
+                  <td>
+                    Item 2:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="name2"
+                      type="text"
+                      placeholder="name" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 2 Description:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="description2"
+                      type="text"
+                      placeholder="description" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 2 Image:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="image2"
+                      type="text"
+                      placeholder="imageurl" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 2 Price:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="price2"
+                      type="number"
+                      placeholder="" />
+                    </fieldset>
+                  </td>
+                </tr>
+                
+                
+
+                
+                <tr>
+                  <td>
+                    Item 3:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="name3"
+                      type="text"
+                      placeholder="name" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 3 Description:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="description3"
+                      type="text"
+                      placeholder="description" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 3 Image:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="image3"
+                      type="text"
+                      placeholder="imageurl" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 3 Price:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="price3"
+                      type="number"
+                      placeholder="" />
+                    </fieldset>
+                  </td>
+                </tr>
+
+
+                <tr>
+                  <td>
+                    Item 4:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="name4"
+                      type="text"
+                      placeholder="name" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 4 Description:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="description4"
+                      type="text"
+                      placeholder="description" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 4 Image:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="image4"
+                      type="text"
+                      placeholder="imageurl" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 4 Price:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="price4"
+                      type="number"
+                      placeholder="" />
+                    </fieldset>
+                  </td>
+                </tr>
+
+
+                <tr>
+                  <td>
+                    Item 5:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="name5"
+                      type="text"
+                      placeholder="name" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 5 Description:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="description5"
+                      type="text"
+                      placeholder="description" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 5 Image:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="image5"
+                      type="text"
+                      placeholder="imageurl" />
+                    </fieldset>
+                  </td>
+                  <td>
+                    Item 5 Price:
+                    <fieldset class="form-group">
+                      <input class="form-control form-control-lg"
+                      formControlName="price5"
+                      type="number"
+                      placeholder="" />
+                    </fieldset>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          -->
+
+            
+
+            <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+              Post Your Biz
+            </button>
+
+          </fieldset>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

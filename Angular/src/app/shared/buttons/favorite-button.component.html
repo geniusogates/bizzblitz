@@ -1,0 +1,7 @@
+<button style="color:black;background-color:white;" class="btn btn-sm"
+ [ngClass]="{ 'disabled' : isSubmitting,
+              'btn-outline-primary': !article.favorited,
+              'btn-primary': article.favorited }"
+ (click)="toggleFavorite()">
+  <i style="color:deeppink;" class="ion-heart"></i> <ng-content></ng-content>
+</button>

@@ -1,0 +1,320 @@
+
+
+
+<div class="article-preview">
+
+  <article-meta [article]="article">
+    <favorite-button
+      [article]="article"
+      (onToggle)="onToggleFavorite($event)"
+      class="pull-xs-right">
+      {{article.favoritesCount}}
+    </favorite-button>
+    <follow-button
+     class=" pull-xs-right"
+     style="margin-right:5px;border-color:black;color:black;"
+     [profile]="article.author"
+     (onToggle)="onToggleFollowing($event)">
+    </follow-button>
+    
+   <!-- <button class="btn btn-sm pull-xs-right" style="margin-right:5px"
+    >
+    </button> btn btn-sm-->
+  </article-meta>
+  <!--<button pull-xs-right>follow</button>
+  [routerLink]="['/article', article.slug]"-->
+  <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+  <a (click)="openModalWithComponent()" class="preview-link">
+    <h1>{{ article.title }}</h1>
+    <div>
+      <p style="font-family:cursive; color:dimgray;">{{ article.description }}</p>
+      <img style="width:100%; background-color:white;" class="thumbnail" src="{{article.postImage}}">
+      <div>
+      <img style="width:100%; background-color:white; height:''" class="thumbnail" src="{{article.postImage1}}">
+    </div>
+     
+    </div>
+
+    <!--<article-page></article-page>--> 
+    <span style="font-family:cursive; color:dimgray;">Read more & comment...</span>
+    <ul class="tag-list">
+      <li class="tag-default tag-pill tag-outline"
+        
+        *ngFor="let tag of article.tagList">
+        
+        <span style="font-family:cursive; color:dimgray;">{{ tag }}</span>
+        
+      </li>
+    </ul>
+  </a>
+
+<!--<button type="button" class="btn btn-primary" (click)="openModalWithComponent()">Create modal with component</button>-->
+<!--<button type="button" class="btn btn-primary" (click)="openModal(template)">Open first modal</button>-->
+<!-- 
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">First modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is a first modal-->
+    <!--<article-page [routerLink]="['/article', article.slug]"></article-page>-->
+    <!--///////////////////////////////////////////////////-->
+    <!--
+    
+               <div class="article-page">
+
+                              <div class="banner" style="padding-top:120px;margin-top:0px;">
+                                <div class="container">
+                                  <h1>{{ article.title }}</h1>
+
+                                  <article-meta [article]="article">
+                                  
+                                      <span [hidden]="!canModify">
+                                      <a class="btn btn-sm btn-outline-secondary"
+                                        [routerLink]="['/editor', article.slug]">
+                                        <i class="ion-edit"></i> Edit Article
+                                      </a>
+
+                                      <button class="btn btn-sm btn-outline-danger"
+                                        [ngClass]="{disabled: isDeleting}"
+                                        (click)="deleteArticle()">
+                                        <i class="ion-trash-a"></i> Delete Article
+                                      </button>
+                                    </span>
+                                    
+
+                                    
+
+                                  </article-meta>
+                                </div>
+                              </div>
+
+                              <div class="container page">
+
+                                <div class="row article-content">
+                                  <div class="col-md-12">
+
+                                    <div [innerHTML]="article.body | markdown"></div>
+                                    
+                                    <div>
+                                      <img style="width:100%; height:''" class="thumbnail" src="{{article.postImage}}">
+                                    </div>
+
+                                    
+                                  <div>
+                                   
+
+                                    <vg-player>
+    <vg-overlay-play></vg-overlay-play>
+    <vg-buffering></vg-buffering>
+
+    <vg-scrub-bar>
+        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+    </vg-scrub-bar>
+
+    <vg-controls>
+        <vg-play-pause></vg-play-pause>
+        <vg-playback-button></vg-playback-button>
+
+        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+        <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+
+        <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+        <vg-track-selector></vg-track-selector>
+        <vg-mute></vg-mute>
+        <vg-volume></vg-volume>
+
+        <vg-fullscreen></vg-fullscreen>
+    </vg-controls>
+
+    <video [hidden]="!article.postVideo" [vgMedia]="media" #media id="singleVideo" preload="auto" crossorigin>
+        <source src="{{article.postVideo}}" type="video/mp4">
+        <source src="{{article.postVideo}}" type="video/ogg">
+        <source src="{{article.postVideo}}" type="video/webm">
+
+        
+    </video>
+</vg-player>
+                                  </div>
+
+                                    <ul class="tag-list">
+                                      <li *ngFor="let tag of article.tagList"
+                                        class="tag-default tag-pill tag-outline">
+                                        {{ tag }}
+                                      </li>
+                                    </ul>
+
+                                  </div>
+                                </div>
+
+                                <hr />
+
+                                <div class="article-actions">
+                                  <article-meta [article]="article">
+
+                                      <span [hidden]="!canModify">
+                                      <a style="color:black;" class="btn btn-sm btn-outline-secondary"
+                                        [routerLink]="['/editor', article.slug]">
+                                        <i class="ion-edit"></i> Edit Article
+                                      </a>
+
+                                      <button class="btn btn-sm btn-outline-danger"
+                                        [ngClass]="{disabled: isDeleting}"
+                                        (click)="deleteArticle()">
+                                        <i class="ion-trash-a"></i> Delete Article
+                                      </button>
+                                    </span>
+
+                                    <span [hidden]="canModify">
+                                      <follow-button
+                                        [profile]="article.author"
+                                        (onToggle)="onToggleFollowing($event)">
+                                      </follow-button>
+
+                                      <favorite-button
+                                        [article]="article"
+                                        (onToggle)="onToggleFavorite($event)">
+                                        {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span class="counter">({{ article.favoritesCount }})</span>
+                                      </favorite-button>
+                                    </span>
+
+                                  </article-meta>
+                                </div>
+
+                                <div class="row">
+                                  <div class="col-xs-12 col-md-8 offset-md-2">
+
+                                    <div *showAuthed="true">
+                                      <list-errors [errors]="commentFormErrors"></list-errors>
+                                      <form class="card comment-form" (ngSubmit)="addComment()">
+                                        <fieldset [disabled]="isSubmitting">
+                                          <div class="card-block">
+                                            <textarea class="form-control"
+                                              placeholder="Write a comment..."
+                                              rows="3"
+                                              [formControl]="commentControl"
+                                            ></textarea>
+                                          </div>
+                                          <div class="card-footer">
+                                            <img src="{{currentUser.image}}" class="comment-author-img" />
+                                            <button class="btn btn-sm btn-primary" type="submit">
+                                            Post Comment
+                                            </button>
+                                          </div>
+                                        </fieldset>
+                                      </form>
+                                    </div>
+
+                                    <div *showAuthed="false">
+                                      <a style="color:mediumblue;" [routerLink]="['/login']">Sign in</a> or <a style="color:mediumblue;" [routerLink]="['/register']">sign up</a> to add comments on this article.
+                                    </div>
+
+                                    <article-comment
+                                      *ngFor="let comment of comments"
+                                      [comment]="comment"
+                                      (deleteComment)="onDeleteComment(comment)">
+                                    </article-comment>
+
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                                    -->
+
+    <!--/////////////////////////////////////////////////////-->
+  <!--  <button type="button" class="btn btn-primary" (click)="openModal2(templateNested)">Open second modal</button>
+  </div>
+</ng-template>
+ 
+<ng-template #templateNested>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Second modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is nested modal.<br>
+    <button *ngIf="modalRef" type="button" class="btn btn-danger" (click)="closeFirstModal()">Close first modal</button>
+  </div>
+</ng-template>-->
+  <!--<video [hidden]="!article.postVideo" class="thumbnail" poster="" preload="thumbnail" controls style="margin-left:'';margin-right:'';margin-top:20px;width:100%;">
+    <source  src="{{article.postVideo}}" type="video/mp4">
+    <source  src="{{article.postVideo}}" type="video/ogg">
+    <source  src="{{article.postVideo}}" type="video/webm">
+    Your browser does not support the video tag.
+  </video>-->
+
+  
+   <!--<video [hidden]="!src"  class="video-js" controls style="margin-left:'';margin-right:'';margin-top:20px;width:100%;height:auto;"
+  poster="MY_VIDEO_POSTER.jpg" data-setup='{}'>
+    <source src="{{article.postVideo}}" type="video/mp4">
+    <source src="{{article.postVideo}}" type="video/ogg">
+    <source src="{{article.postVideo}}" type="video/webm">
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+  </video>-->
+  <vg-player>
+    <vg-overlay-play></vg-overlay-play>
+    <vg-buffering></vg-buffering>
+
+    <vg-scrub-bar>
+        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+    </vg-scrub-bar>
+
+    <vg-controls [vgAutohide]="true" [vgAutohideTime]="1.5">
+        <vg-play-pause></vg-play-pause>
+        <vg-playback-button></vg-playback-button>
+
+        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+        <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+
+        <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+        <!--<vg-track-selector></vg-track-selector>-->
+        <vg-mute></vg-mute>
+        <vg-volume></vg-volume>
+
+        <vg-fullscreen></vg-fullscreen>
+    </vg-controls>
+
+    <video style="width:100%; background-color:white;" [hidden]="!article.postVideo" [vgMedia]="media" #media id="singleVideo" preload="auto" crossorigin>
+        <source src="{{article.postVideo}}" type="video/mp4">
+        <source src="{{article.postVideo}}" type="video/ogg">
+        <source src="{{article.postVideo}}" type="video/webm">
+
+        <!--<track kind="subtitles" label="English" src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" srclang="en" default>-->
+        <!--<track kind="subtitles" label="Español" src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt" srclang="es">-->
+    </video>
+</vg-player>
+</div>
+
+
+<!--<p>{{ article.description }}</p> ////////[vgMedia]="media" #media id="singleVideo"-->
+<!--<p>{{ listing.description }}</p>-->
+
+<!--<div class="tag-list">
+    <a href="#"
+       *ngFor="let tag of tags"
+       (click)="setListTo('all', {tag: tag})"
+       class="tag-default tag-pill">
+       {{ tag }}
+    </a>
+  </div>-->
+
+
+
+<!--<img [src]="comment.author.image" class="comment-author-img" />-->

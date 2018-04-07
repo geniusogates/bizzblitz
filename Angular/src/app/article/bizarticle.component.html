@@ -1,0 +1,196 @@
+<div class="modal-header">
+      <h4 class="modal-title pull-left">{{title}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+
+<div class="article-page modal-body">
+
+  <div class="banner modal-body" style="margin:-15px;margin-top:-15px;background-color:#529FCD">
+    <div class="container">
+      <h1>{{ bizarticle.title }}</h1>
+      <h4><strong style="color:black;font-size:20px">Location: </strong><span style="font-size:15px"> {{ bizarticle.location }}</span></h4>
+      <h4><strong style="color:black;font-size:20px">Item: </strong><span style="font-size:15px"> {{ bizarticle.name1 }}</span></h4>
+      <h4><strong style="color:black;font-size:20px">Price: </strong><span style="font-size:15px"> {{ bizarticle.price1 }}</span></h4>
+      <h4><strong style="color:black;font-size:20px">Phone: </strong> <a style="color:white;" href="https://api.whatsapp.com/send?phone={{ bizarticle.phone }}"><span style="font-size:15px">{{ bizarticle.phone }} <i style="color:#01E675;font-size:20px;" class="fa fa-whatsapp" aria-hidden="true"></i></span></a></h4>
+      <h4><strong style="color:black;font-size:20px">Email: </strong><span style="font-size:15px"> {{ bizarticle.email }}</span></h4>
+
+     <bizarticle-meta [bizarticle]="bizarticle" (click)="bsModalRef.hide()">
+      
+          <span [hidden]="!canModify">
+          <a class="btn btn-sm btn-outline-secondary"
+             [routerLink]="['/bizeditor', bizarticle.slug]">
+            <i class="ion-edit"></i>
+          </a>
+
+          <button class="btn btn-sm btn-outline-danger"
+            [ngClass]="{disabled: isDeleting}"
+            (click)="deleteBizArticle()">
+            <i class="ion-trash-a"></i>
+          </button>
+        </span>
+
+        <span [hidden]="canModify">
+          <follow-button
+            [profile]="bizarticle.author"
+            (onToggle)="onToggleFollowing($event)">
+          </follow-button>
+
+          <bizfavorite-button
+            [bizarticle]="bizarticle"
+            (onToggle)="onToggleFavorite($event)">
+            <!--{{ bizarticle.favorited ? 'Unfavorite' : 'Favorite' }} Item--> <span class="counter">({{ bizarticle.favoritesCount }})</span>
+          </bizfavorite-button>
+        </span>
+
+     </bizarticle-meta>
+    </div>
+    <!--<div class="container">
+      <p>{{ bizarticle.description }}</p>
+      <img style="width:20%;height:250px; background-color:white;" class="thumbnail" src="{{bizarticle.postImage}}">
+    </div>
+  style="padding-top:0px;margin-top:120px;"
+  First slide Second slide Third slide-->
+  </div>
+
+  <div class="modal-body" style="margin:-30px;">
+      <img style="width:100%; background-color:white;" class="thumbnail" src="{{bizarticle.postImage}}">
+      <img style="width:100%; background-color:white; height:''" class="thumbnail" src="{{bizarticle.postImage1}}">
+      <img style="width:100%; background-color:white; height:''" class="thumbnail" src="{{bizarticle.postImage2}}">
+
+    </div>
+
+<!--<div class="modal-body" style="margin-top:35px;">
+ <carousel>
+  <slide>
+    <img src="{{bizarticle.postImage}}" alt="" style="display: block; width: 100%;background-color:white;">
+  </slide>
+  <slide>
+    <img src="{{bizarticle.postImage1}}" alt="" style="display: block; width: 100%;background-color:white;">
+  </slide>
+  <slide>
+    <img src="{{bizarticle.postImage2}}" alt="" style="display: block; width: 100%;background-color:white;">
+  </slide>
+</carousel>
+</div>-->
+
+  <div class="container page modal-body" style="margin:-15px;">
+
+    <div class="row article-content">
+      <div class="col-md-12">
+
+        <div class="page modal-body" [innerHTML]="bizarticle.body | bizmarkdown"></div>
+        <div class="page modal-body" [innerHTML]="bizarticle.description | bizmarkdown"></div>
+        <div class="page modal-body" [innerHTML]="bizarticle.description1 | bizmarkdown"></div>
+         
+        <!--<<div>
+          <img style="width:100%;" class="thumbnail" src="{{bizarticle.postImage}}">
+        </div>
+        <div>
+          <img style="width:100%;" class="thumbnail" src="{{bizarticle.postImage1}}">
+        </div>
+        <div>
+          <img style="width:100%;" class="thumbnail" src="{{bizarticle.postImage2}}">
+        </div>-->
+         <div class="modal-body">
+            <ul class="tag-list">
+              <li *ngFor="let tag of bizarticle.tagList"
+                class="tag-default tag-pill tag-outline">
+                {{ tag }}
+              </li>
+            </ul>
+         </div>
+
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="article-actions">
+     <bizarticle-meta [bizarticle]="bizarticle">
+
+          <span [hidden]="!canModify">
+          <a class="btn btn-sm btn-outline-secondary"
+             [routerLink]="['/bizeditor', bizarticle.slug]">
+            <i class="ion-edit"></i>
+          </a>
+
+          <button class="btn btn-sm btn-outline-danger"
+            [ngClass]="{disabled: isDeleting}"
+            (click)="deleteBizArticle()">
+            <i class="ion-trash-a"></i>
+          </button>
+        </span>
+
+        <span [hidden]="canModify">
+          <follow-button
+            [profile]="bizarticle.author"
+            (onToggle)="onToggleFollowing($event)">
+          </follow-button>
+
+          <bizfavorite-button
+            [bizarticle]="bizarticle"
+            (onToggle)="onToggleFavorite($event)">
+            <!--{{ bizarticle.favorited ? 'Unfavorite' : 'Favorite' }} Bizarticle--> <span class="counter">({{ bizarticle.favoritesCount }})</span>
+          </bizfavorite-button>
+        </span>
+
+      </bizarticle-meta>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+
+        <div *showAuthed="true">
+          <list-errors [errors]="commentFormErrors"></list-errors>
+          <form class="card comment-form" (ngSubmit)="addComment()">
+            <fieldset [disabled]="isSubmitting">
+              <div class="card-block">
+                <textarea class="form-control"
+                  placeholder="Write a comment..."
+                  rows="3"
+                  [formControl]="commentControl"
+                ></textarea>
+              </div>
+              <div class="card-footer">
+                <img src="{{currentUser.image}}" class="comment-author-img" />
+                <button [disabled]="!commentControl.value" class="btn btn-sm btn-primary" type="submit">
+                 Comment
+                </button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+
+        <div *showAuthed="false">
+          <a style="color:mediumblue;" [routerLink]="['/login']" (click)="bsModalRef.hide()">Sign in</a> or <a style="color:mediumblue;" [routerLink]="['/register']" (click)="bsModalRef.hide()">sign up</a> to add comments on this item.
+        </div>
+
+        <bizarticle-comment
+          *ngFor="let comment of comments"
+          [comment]="comment"
+          (deleteComment)="onDeleteComment(comment)">
+        </bizarticle-comment>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+</div>
+
+
+
+<!--
+  Colors for banner
+#E5BAD6-pink
+#1A1A1A-black
+#4C5053-best grey
+#454545-not bad grey
+<img [src]="currentUser.image" class="comment-author-img" />
+-->

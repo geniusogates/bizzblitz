@@ -1,0 +1,271 @@
+<div class="editor-page">
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-10 offset-md-1 col-xs-12">
+                <h3 style="padding-top:0px;margin-top:120px;">Proceed to post with Video or click <a href="/editor" style="color:blue;">here to post with Image.</a></h3>
+  
+          <list-errors [errors]="errors"></list-errors>
+  
+          <form [formGroup]="articleForm" >
+            <fieldset [disabled]="isSubmitting">
+  
+              <fieldset class="form-group">
+                  <label>Title:</label>
+                <input class="form-control form-control-lg"
+                  formControlName="title"
+                  type="text"
+                  placeholder="Title" />
+              </fieldset>
+  
+              <fieldset class="form-group">
+                  <label>Description:</label>
+                <input class="form-control"
+                  formControlName="description" 
+                  type="text"
+                  placeholder="What's this article about? description" />
+              </fieldset>
+  
+              <!--<fieldset class="form-group">
+                <input class="form-control" name="description" [(ngModel)]="description"
+                  type="text"
+                  placeholder="URL of post picture"
+                  formControlName="postImage" />
+              </fieldset>-->
+              <!--<fieldset class="form-group">
+                <div><h2>Add Pic:</h2></div>
+                <input id="image" class="form-control"
+                  formControlName="image" name="image" [(ngModel)]="image"
+                  type="file"
+                 />
+              </fieldset>-->
+  
+              <fieldset class="form-group">
+                  <label>Main Body:</label>
+                <textarea class="form-control"
+                  formControlName="body"
+                  rows="8"
+                  placeholder="Main body">
+                </textarea>
+              </fieldset>
+  
+              <fieldset class="form-group">
+                  <label>Tags:</label>
+                <input class="form-control"
+                  type="text"
+                  placeholder="Enter tags"
+                  [formControl]="tagField"
+                  (keyup.enter)="addTag()" />
+  
+                <div class="tag-list">
+                  <span *ngFor="let tag of article.tagList"
+                    class="tag-default tag-pill">
+                    <i class="ion-close-round" (click)="removeTag(tag)"></i>
+                    {{ tag }}
+                  </span>
+                </div>
+              </fieldset>
+              <p>Choose a Video below:</p>
+  
+              <fieldset class="form-group">
+                  <!--<form ngNoForm>
+                    <input id="file" name="file" type="file" >
+                    <button style="margin-top:10px;" (click)="uploadf()" type="button">Upload</button>
+                  </form>
+                  <div [hidden]="uploadComplete" style="color:blue;"><h6>{{uploadStarted}}</h6></div>
+                  <div style="color:green;"><h6>{{uploadComplete}}</h6></div>-->
+                  
+                  
+                  <!--<div [hidden]="!image" style="overflow:hidden;">
+                    <div style="position:relative;width:100px;height:100px;float:left;display:flex;justify-content:center;align-items:center;">
+                      <img [src]="image" style="max-width:100px;max-height:100px;">
+                      <!-<button (click)="deletef()" style="position:absolute;top:2px;right:2px;">[x]</button>->
+                    </div>
+                  </div>-->
+                  
+                                   <!--INPUT FOR IMAGE UPLOADING postImage-->
+                           
+                                    <!--<input type="file" class="form-control"
+                                    id=video
+                                    ngFileSelect
+                                    [options]="options"
+                                    (onUpload)="handleUpload($event)"
+                                    (beforeUpload)="beforeUpload($event)">
+                                    <p>Please, wait for image to appear before u hit 'Publish' button, may take a few seconds depending on your internet..</p>-->
+                                    
+                                    
+                                    <input type="file" ng2FileSelect [uploader]="uploader" accept="video/*;capture=camera">
+                                    <button style="margin-top:10px;" (click)="upload()">Upload</button>
+                                    <!--Response: {{uploadFile}}-->
+                                    <div [hidden]="uploadComplete" style="color:blue;"><h6>{{uploadStarted}}</h6></div>
+                                    <div style="color:green;"><h6>{{uploadComplete}}</h6></div>
+                                    <!--<div>-->
+                                       
+                                       
+                                       
+                                        <!--<video controls>
+                                          <source src="{{uploadFile}}" type="video/mp4">
+                                            <source src="{{uploadFile}}" type="video/ogg">
+                                            Your browser does not support the video tag.
+                                        </video>-->
+
+                                        <!--<!-<img style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" src="{{uploadFile.image}}">-
+                                        <video class="thumbnail" poster="" preload="thumbnail" controls style="margin-left:'';margin-right:'';margin-top:20px;width:100%;">
+                                            <source src="{{uploadFile.image}}" type="video/mp4">
+                                            <source src="{{uploadFile.image}}" type="video/ogg">
+                                            Your browser does not support the video tag.
+                                          </video>
+                                     
+                                    </div>-->
+                  
+                              </fieldset>
+                             
+                  
+                              <fieldset hidden class="form-group">
+                                <input class="form-control"
+                                  type="text"
+                                  value="{{uploadFile}}"
+                                  name = "postVideo"
+                                  name="video" [(ngModel)]="video"
+                                  
+                                  formControlName="postVideo" />
+                              </fieldset>
+
+                              <!--<div>
+                                Response: {{ uploadFile | json }}
+                                </div>-->
+
+
+                              
+  
+  
+                             <!-- <style>
+                                  .my-drop-zone { border: dotted 3px lightgray; }
+                                  .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+                                  .another-file-over-class { border: dotted 3px green; }
+                               
+                                  html, body { height: 100%; }
+                              </style>
+                               
+                              <div class="container">
+                               
+                                  <div class="navbar navbar-default">
+                                      <div class="navbar-header">
+                                          <a class="navbar-brand" href>Angular2 File Upload</a>
+                                      </div>
+                                  </div>
+                               
+                                  <div class="row">
+                               
+                                      <div class="col-md-3">
+                               
+                                          <h3>Select files</h3>
+                               
+                                          <div ng2FileDrop
+                                               [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                                               (fileOver)="fileOverBase($event)"
+                                               [uploader]="uploader"
+                                               class="well my-drop-zone">
+                                              Base drop zone
+                                          </div>
+                               
+                                          <div ng2FileDrop
+                                               [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                                               (fileOver)="fileOverAnother($event)"
+                                               [uploader]="uploader"
+                                               class="well my-drop-zone">
+                                              Another drop zone
+                                          </div>
+                               
+                                          Multiple
+                                          <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+                               
+                                          Single
+                                          <input type="file" ng2FileSelect [uploader]="uploader" />
+                                      </div>
+                               
+                                      <div class="col-md-9" style="margin-bottom: 40px">
+                               
+                                          <h3>Upload queue</h3>
+                                          <p>Queue length: {{ uploader?.queue?.length }}</p>
+                               
+                                          <table class="table">
+                                              <thead>
+                                              <tr>
+                                                  <th width="50%">Name</th>
+                                                  <th>Size</th>
+                                                  <th>Progress</th>
+                                                  <th>Status</th>
+                                                  <th>Actions</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>
+                                              <tr *ngFor="let item of uploader.queue">
+                                                  <td><strong>{{ item?.file?.name }}</strong></td>
+                                                  <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                                                  <td *ngIf="uploader.isHTML5">
+                                                      <div class="progress" style="margin-bottom: 0;">
+                                                          <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                                                      </div>
+                                                  </td>
+                                                  <td class="text-center">
+                                                      <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                                      <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                                      <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                                  </td>
+                                                  <td nowrap>
+                                                      <button type="button" class="btn btn-success btn-xs"
+                                                              (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                                          <span class="glyphicon glyphicon-upload"></span> Upload
+                                                      </button>
+                                                      <button type="button" class="btn btn-warning btn-xs"
+                                                              (click)="item.cancel()" [disabled]="!item.isUploading">
+                                                          <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                                      </button>
+                                                      <button type="button" class="btn btn-danger btn-xs"
+                                                              (click)="item.remove()">
+                                                          <span class="glyphicon glyphicon-trash"></span> Remove
+                                                      </button>
+                                                  </td>
+                                              </tr>
+                                              </tbody>
+                                          </table>
+                               
+                                          <div>
+                                              <div>
+                                                  Queue progress:
+                                                  <div class="progress" style="">
+                                                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                                                  </div>
+                                              </div>
+                                              <button type="button" class="btn btn-success btn-s"
+                                                      (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                                                  <span class="glyphicon glyphicon-upload"></span> Upload all
+                                              </button>
+                                              <button type="button" class="btn btn-warning btn-s"
+                                                      (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                                                  <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                                              </button>
+                                              <button type="button" class="btn btn-danger btn-s"
+                                                      (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                                                  <span class="glyphicon glyphicon-trash"></span> Remove all
+                                              </button>
+                                          </div>
+                               
+                                      </div>
+                               
+                                  </div>
+                               
+                              </div>-->
+  
+              <button style="margin-top:15px;" class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+                Publish Article
+              </button>
+  
+            </fieldset>
+          </form>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  

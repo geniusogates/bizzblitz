@@ -1,0 +1,572 @@
+
+<!--//////////////////*showAuthed="false"////*ngIf="!authService.isLoggedIn()"/////////////////////////-->
+
+<div class="home-page">
+
+  <div class="banner" *showAuthed="false" style="background-color:#A82B49; padding-top:100px; margin:-15px;">
+    <div class="container">
+      <h1 class="logo-font">BizzChat</h1>
+      <p><i>Chat as your business grow!! on BizzChat Compare prices across businesses.</i></p>
+    </div>
+  </div>
+
+  <div class="container page" style="margin-top:25px;">
+    <div class="row" style="margin:-30px; margin-top:25px;">
+
+          <div class="col-md-3" style="margin-top:20px; margin-bottom:25px;">
+                          <div>
+                              <p style="font-weight:bold;" *showAuthed="false"><i>
+                                New to Bizzchat??
+                                <a style="color:mediumblue;" [routerLink]="['/register']">Sign up now</a> or have an account?? <a style="color:mediumblue;" [routerLink]="['/login']">Sign In</a> to get your own personalized timeline!! </i></p>
+                          </div>
+
+                          <div *showAuthed="false">
+                            <button style="color:white; background-color:#89A5BF; " type="button" class="btn btn-outline" (click)="openModal(template)"><i style="font-weight:bold;">Show Users?</i></button>
+                            <button style="color:white; background-color:#89A5BF; " type="button" class="btn btn-outline" (click)="openTags(tagz)"><i style="font-weight:bold;">Show Tags?</i></button>
+                          </div>
+
+                 <!--///////class="card"//////class="card-block"////img-responsive///////////////////////////////-->
+                    <div>
+
+                          
+                        <div class="card" *showAuthed="true">
+                                <img class="card-img-top img-responsive" style="width:100%;"
+                                src="{{currentUser.image1}}" *ngIf="currentUser.image1">
+                                <div class="card-block">
+                                    <!--<img src="https://res.cloudinary.com/dkacztgxr/image/upload/v1506102725/vd2w4lrzuvrmsjpzyoea.jpg" class="card-img">-->
+                                    <!--<img src="{{currentUser.image}}" *ngIf="currentUser.image" class="card-img" />-->
+                                    <!--<img src="{{profile.image}}" class="user-img" />-->
+                                    <a class="nav-link"
+                                    [routerLink]="['/profile', currentUser.username]"
+                                    routerLinkActive="active">
+                                    <img src="{{currentUser.image}}" *ngIf="currentUser.image" class="card-img" />
+                                    <span style="color:blue;">{{ currentUser.username }}</span>
+                                  </a>
+                                    <!--<h4 class="card-title">Jonny Doo <small>@jonnydoo</small></h4>-->
+                                    <p style="color:black">{{ currentUser.bio }}</p>
+                                    <!--<div class="input-group" style="padding-top:0px;margin-top:20px;">
+                                        <input (keyup.enter)="searchd()" type="text" class="form-control" placeholder="Search Users..." [(ngModel)] = "searchTerm" name="searchTerm">
+                                        <span class="input-group-btn">
+                                          <button class="btn btn-success" type="button" (click) = "searchd()">Search</button>
+                                        </span>
+                                    </div>-->
+                                    
+                                            <!--<p style="color:blue">{{ users.length }}</p>
+                                            <p style="color:blue">{{ following.length }}</p>-->
+                                              
+                                            <div class="row" style="margin-left:-1px;">
+                                                <!--<button style="color:blue; background-color:#89A5BF; margin-bottom:10px;" type="button" class="btn btn-outline" (click)="openFollowing(following)"><i style="font-weight:bold;">following</i></button>-->
+                                                <div style="color:blue; margin-right:10px;font-weight:bolder;"><a href="#" (click)="openFollowing(following)">Following:<span style="color:blue;font-size:20px;">{{ followings.length }}</span></a></div>
+                                                <!--<div style="color:blue; margin-right:10px; font-weight:bolder;">Followers:<span >{{ following.length }}</span></div>-->
+                                                <div style="color:blue; font-weight:bolder;"><a href="#" (click)="openFollowers(followerz)">Followers:<span style="color:blue;font-size:20px;">{{ followers.length }}</span></a></div>
+                                            </div>
+
+                                            <div class="row" style="margin-left:-1px; margin-top:10px;">
+                                              <button style="color:white; background-color:#89A5BF; margin-right:5px; margin-bottom:10px;" type="button" class="btn btn-outline" (click)="openModal(template)"><i style="font-weight:bold;">Show Users?</i></button>
+                                              <button style="color:white; background-color:#89A5BF; margin-bottom:10px;" type="button" class="btn btn-outline" (click)="openTags(tagz)"><i style="font-weight:bold;">Show Tags?</i></button>
+                                            </div>
+
+
+                                            
+                                            <!--<p class="card-text">Dog goes woofy. Did you said squitly?</p>-->
+                                            <!--<ul class="list-inline list-unstyled">
+                                            <li id="card-tweets">
+                                            <a href="#">
+                                            <span class="profile-stats">Posts: </span>
+                                            <span class="profile-value">{{length}}</span>
+                                            </a>
+                                            </li>
+                                            
+                                            <li class="class="profile-value"">
+                                            <a href="#">
+                                            <span class="profile-stats">Following</span>
+                                            <span class="profile-value">7</span>
+                                            </a>
+                                            </li>
+                                            <li class="card-followers">
+                                            <a href="#">
+                                            <span class="profile-stats">Followers</span>
+                                            <span class="profile-value">132k</span>
+                                            </a>
+                                            </li>
+                                            </ul>-->
+                                </div>
+                                    
+                                            
+
+
+                        </div>
+                 
+                                            
+
+                    </div> 
+                  <!--///////////////////////////////////////////////-->
+          </div>
+
+      <div style="margin-top:20px;" class="col-md-6">
+             
+        <div class="feed-toggle">
+          <ul class="nav nav-pills outline-active nav-fixed">
+            <li class="nav-item">
+              <a class="nav-link"
+                 [ngClass]="{'active': listConfig.type === 'feed'}"
+                 (click)="setListTo('feed')">
+                 <i style="color:black;" class="fa fa-user-plus" aria-hidden="true"></i><span style="font-weight:bolder;color:blue;">Following</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                 [ngClass]="{'active': listConfig.type === 'all' && !listConfig.filters.tag}"
+                 (click)="setListTo('all')">
+                 <i style="color:black;" class="fa fa-rocket" aria-hidden="true"></i><span style="font-weight:bolder;color:blue;">Global Juice</span>
+              </a>
+
+  
+
+            </li>
+            <li class="nav-item" style="font-weight:bolder;" [hidden]="!listConfig.filters.tag">
+              <a class="nav-link active">
+                <i style="color:black;" class="ion-pound"></i> <span style="color:chartreuse;">{{ listConfig.filters.tag }}</span>
+              </a>
+            </li>
+            
+            <!--<li class="nav-item">
+              <a class="nav-link"
+                 [ngClass]="{'active': listConfig.type === 'feed'}"
+                 (click)="setListTo('#')">
+                 Shout-Outs
+              </a>
+            </li>-->
+            
+              <li class="nav-item">
+                    <a class="nav-link"
+                    [routerLink]="['/bizhome']">
+                    <i style="color:black;" class="fa fa-shopping-bag" aria-hidden="true"></i><span style="font-weight:bolder;color:black;">Tour Bizz World</span>
+                    </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link"
+                  [routerLink]="['/shouthome']">
+                    <i style="color:black;" class="fa fa-heartbeat" aria-hidden="true"></i><span style="font-weight:bolder;color:deeppink;">Shout-Outs</span>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link"
+                  [routerLink]="['/carhome']">
+                    <i style="color:black;" class="fa fa-car" aria-hidden="true"></i><span style="font-weight:bolder;color:orangered;">Find Cars</span>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link"
+                  [routerLink]="['/apathome']">
+                    <i style="color:black;" class="fa fa-building" aria-hidden="true"></i><span style="font-weight:bolder;color:dodgerblue;">Find Apartments/Rentals</span>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link"
+                  [routerLink]="['/landhome']">
+                    <i style="color:black;" class="fa fa-map" aria-hidden="true"></i><span style="font-weight:bolder;color:maroon;">Find Land</span>
+                  </a>
+              </li>
+            
+          </ul>
+        </div>
+
+        <article-list [limit]="50" [config]="listConfig"></article-list>
+        
+      </div>
+
+      <div class="col-md-3" style="margin-top:20px; margin-bottom:25px;">
+        <div class="sidebar">
+          
+          <!--<p style="font-weight:bold;"><i>Popular Tags</i></p>-->
+          <p style="padding-top:0px;"><button style="margin-left:0px;width:100%;" type="button" class="btn btn-success" (click)="toggleTags2Search()"><i style="font-weight:bold;">Popular Tags</i></button></p>
+
+  
+            
+            <div>
+                <div *ngIf=isSearchTags2>
+                    <div class="tag-list">
+                        <a href="#"
+                          *ngFor="let tag of tags"
+                          (click)="setListTo('all', {tag: tag})"
+                          class="tag-default tag-pill">
+                          {{ tag }}
+                        </a>
+                      </div>
+                    
+
+                      <div [hidden]="tagsLoaded">
+                        Loading tags...
+                      </div>
+
+                      <div [hidden]="!tagsLoaded || tags.length">
+                        No tags are here... yet.
+                      </div>
+                </div>
+                     <div>
+                        <img style="width:100%" src="https://pbs.twimg.com/media/DIWA3StW0AAu1Zl.jpg" class="thumbnail" />
+                     </div>
+            </div>
+        
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+ <p>Popular Tags</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div class="tag-list">
+            <a href="#"
+               *ngFor="let tag of tags"
+               (click)="setListTo('all', {tag: tag})"
+               class="tag-default tag-pill">
+               {{ tag }}
+            </a>
+          </div>
+
+          <div [hidden]="tagsLoaded">
+            Loading tags...
+          </div>
+
+          <div [hidden]="!tagsLoaded || tags.length">
+            No tags are here... yet.
+          </div>
+         ////////// [routerLink]="['/article', article.slug]" class="preview-link">
+         ////////// (click)="setBizListTo('all')"
+
+
+         What? No Tweets yet?
+This empty timeline won’t be around for long. Start following people and you’ll see Tweets show up here.
+  -->
+
+
+
+
+
+  <!--///////class="card"//////class="card-block"////img-responsive///////////////////////////////-->
+                     <!--<div>
+                        <div class="card" *showAuthed="true">
+                                <img class="card-img-top " style="width:235px;"
+                                src="{{currentUser.image1}}" *ngIf="currentUser.image1">
+                                <div class="card-block">
+                                    
+                                    <a class="nav-link"
+                                    [routerLink]="['/profile', currentUser.username]"
+                                    routerLinkActive="active">
+                                    <img src="{{currentUser.image}}" *ngIf="currentUser.image" class="card-img" />
+                                    <span style="color:blue;">{{ currentUser.username }}</span>
+                                  </a>-->
+                                    <!--<h4 class="card-title">Jonny Doo <small>@jonnydoo</small></h4>-->
+                                    <!--<p style="color:black">{{ currentUser.bio }}</p>
+                                    
+                                    
+                                            
+                                              
+                                            <div class="row" style="margin-left:-1px;">
+                                                
+                                                <div style="color:blue; margin-right:10px;font-weight:bolder;"><a href="#" (click)="openFollowing(following)">Following:<span style="color:blue;font-size:20px;">{{ followings.length }}</span></a></div>
+                                                
+                                                <div style="color:blue; font-weight:bolder;"><a href="#" (click)="openFollowers(followerz)">Followers:<span style="color:blue;font-size:20px;">{{ followers.length }}</span></a></div>
+                                            </div>
+                                            
+                                    </div>
+                        </div>
+                      </div> -->
+  <!--///////////////////////////////////////////////-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="col-md-3" style="margin-top:20px; margin-bottom:25px;" >
+        <div class="sidebar">
+          
+            <p style="font-weight:bold;" *showAuthed="false"><i>
+                New to Bizzchat??
+                <a style="color:mediumblue;" [routerLink]="['/register']">Sign up now</a> or have an account?? <a style="color:mediumblue;" [routerLink]="['/login']">Sign In</a> to get your own personalized timeline!! </i></p>
+                  
+                    
+                <div class="row" style="margin-left:-1px;">
+                  <button style="color:white; background-color:#89A5BF; margin-bottom:10px;" type="button" class="btn btn-outline" (click)="openModal(template)"><i style="font-weight:bold;">Show Users?</i></button>
+                  <button style="color:white; background-color:#89A5BF; margin-bottom:10px;" type="button" class="btn btn-outline" (click)="openTags(tagz)"><i style="font-weight:bold;">Show Tags?</i></button>
+                </div>
+                  <div *ngIf=isSearchUser>
+                    <div class="col-xs-12">
+                        <form class="well">
+                          <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search users..." [(ngModel)]="search" name="search" (keyup)="searchProps()">	
+                          </div>						
+                        </form>	
+                      <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let user of users">
+                          <a class="nav-link"
+                            [routerLink]="['/profile', user.username]"
+                            routerLinkActive="active">
+                            <img src="{{ user.image }}" *ngIf="user.image" class="user-pic" />
+                            
+                          </a>
+
+                          <a [routerLink]="['/profile', user.username]">{{user.username}}</a>
+                        </li>
+                      </ul>				
+                      </div>
+                    <div class="col-xs-12" *ngIf="count === 0"></div>
+                  </div>-->
+                    <!--////////////////No users found.////////////////////////-->
+
+
+                         <ng-template #template>
+                            <div class="modal-header">
+                              <h4 class="modal-title pull-left">Search Users</h4>
+                              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              
+                              <!--/////////////////-->
+                                     <div class="col-xs-12">
+                                        <form class="well">
+                                          <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Search users..." [(ngModel)]="search" name="search" (keyup)="searchProps()">	
+                                          </div>						
+                                        </form>	
+                                      <ul class="list-group">
+                                        <li class="list-group-item" *ngFor="let user of users">
+                                          <a class="nav-link"
+                                            (click)="modalRef.hide()"
+                                            [routerLink]="['/profile', user.username]"
+                                            routerLinkActive="active">
+                                            <img src="{{ user.image }}" *ngIf="user.image" class="user-pic" />
+                                            <!--*ngIf="currentUser.image" {{ currentUser.username||image }} authService. {{currentUser.photoURL}}-->
+                                          </a>
+
+                                          <a (click)="modalRef.hide()" [routerLink]="['/profile', user.username]">{{user.username}}</a>
+                                               <!--<follow-button
+                                                  class=" pull-xs-right"
+                                                  style="margin-right:5px;border-color:black;color:black;"
+                                                  [profile]="user.following"
+                                                  (onToggle)="onToggleFollowing($event)">
+                                               </follow-button>-->
+                                        </li>
+                                      </ul>				
+                                     </div>
+                              <!--/////////////////-->
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+                            </div>
+                         </ng-template>
+
+                    <!--////////////////////////////////////////////////////////-->
+
+
+                    <!--////////////////No users found.////////////////////////-->
+
+
+                         <ng-template #following>
+                            <div class="modal-header">
+                              <h4 class="modal-title pull-left">Users I Am Following</h4>
+                              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              
+                              <!--/////////////////-->
+                                     <div class="col-xs-12">
+                                        
+                                      <ul class="list-group">
+                                        <li class="list-group-item" *ngFor="let following of followings">
+                                          <a class="nav-link"
+                                            (click)="modalRef.hide()"
+                                            [routerLink]="['/profile', following]"
+                                            routerLinkActive="active">
+                                            <img src="{{ following.image }}" *ngIf="following.image" class="user-pic" />
+                                            <!--*ngIf="currentUser.image" {{ currentUser.username||image }} authService. {{currentUser.photoURL}}-->
+                                          </a>
+
+                                          <a (click)="modalRef.hide()" [routerLink]="['/profile', following]">{{following}}</a>
+                                        </li>
+                                      </ul>				
+                                     </div>
+                              <!--/////////////////-->
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+                            </div>
+                         </ng-template>
+
+                    <!--////////////////////////////////////////////////////////-->
+
+
+                    <!--////////////////No users found.////////////////////////-->
+
+
+                         <ng-template #followerz>
+                            <div class="modal-header">
+                              <h4 class="modal-title pull-left">Users Following Me</h4>
+                              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              
+                              <!--/////////////////-->
+                                     <div class="col-xs-12">
+                                        
+                                      <ul class="list-group">
+                                        <li class="list-group-item" *ngFor="let follower of followers">
+                                          <a class="nav-link"
+                                            (click)="modalRef.hide()"
+                                            [routerLink]="['/profile', follower]"
+                                            routerLinkActive="active">
+                                            <img src="{{ follower.image }}" *ngIf="follower.image" class="user-pic" />
+                                            <!--*ngIf="currentUser.image" {{ currentUser.username||image }} authService. {{currentUser.photoURL}}-->
+                                          </a>
+
+                                          <a (click)="modalRef.hide()" [routerLink]="['/profile', follower]">{{follower}}</a>
+                                        </li>
+                                      </ul>				
+                                     </div>
+                              <!--/////////////////-->
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+                            </div>
+                         </ng-template>
+
+                    <!--////////////////////////////////////////////////////////-->
+
+
+                    <!--////////////////No users found.////////////////////////-->
+
+
+                         <ng-template #tagz>
+                            <div class="modal-header">
+                              <h4 class="modal-title pull-left">Search By Tags!!</h4>
+                              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              
+                              <!--/////////////////-->
+                                     <div class="tag-list">
+                                  <a href="#"
+                                    (click)="modalRef.hide()"
+                                    *ngFor="let tag of tags"
+                                    (click)="setListTo('all', {tag: tag})"
+                                    class="tag-default tag-pill">
+                                    {{ tag }}
+                                  </a>
+                              </div>
+                              
+
+                              <div [hidden]="tagsLoaded">
+                                  Loading tags...
+                              </div>
+
+                              <div [hidden]="!tagsLoaded || tags.length">
+                                  No tags are here... yet.
+                              </div>
+                              <!--/////////////////-->
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+                            </div>
+                         </ng-template>
+
+                    <!--////////////////////////////////////////////////////////-->
+
+
+                          <div *ngIf=isSearchTags>
+                              
+                              <div class="tag-list">
+                                  <a href="#"
+                                    *ngFor="let tag of tags"
+                                    (click)="setListTo('all', {tag: tag})"
+                                    class="tag-default tag-pill">
+                                    {{ tag }}
+                                  </a>
+                              </div>
+                              
+
+                              <div [hidden]="tagsLoaded">
+                                  Loading tags...
+                              </div>
+
+                              <div [hidden]="!tagsLoaded || tags.length">
+                                  No tags are here... yet.
+                              </div>
+                            
+                          </div>
+                    <!--////////////////margin-left:0px;margin-right:0px;padding-left:0px;padding-right:0px;///////////////////////-->
+                    
+         
+        <!--</div>-->
+      <!--</div>-->

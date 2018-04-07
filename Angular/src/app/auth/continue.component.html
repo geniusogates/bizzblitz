@@ -1,0 +1,131 @@
+<!--<div class="auth-page" style="padding-top:0px;margin-top:120px;">
+  <div class="container page">
+    <div class="row">-->
+<!--///////(click)="logout()"
+          (click)="authService.logout()"//////////////////-->
+      <!--<div class="col-md-6 offset-md-3 col-xs-12">
+          <button class="btn btn-outline-success"
+          (click)="regist()">
+          register user.
+        </button>
+        <h1 class="text-xs-center">{{ title }}</h1>
+        <p class="text-xs-center">
+          <a [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
+          <a [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
+        </p>
+        <p>{{flash | json}}</p>
+        <list-errors [errors]="errors"></list-errors>
+        <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+          <fieldset [disabled]="isSubmitting">
+            <fieldset class="form-group">
+              <input
+                formControlName="username"
+                placeholder="Username"
+                class="form-control form-control-lg"
+                type="text"
+                *ngIf="authType == 'register'" />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                formControlName="email"
+                placeholder="Email"
+                class="form-control form-control-lg"
+                type="text" />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                formControlName="password"
+                placeholder="Password"
+                class="form-control form-control-lg"
+                type="password" />
+            </fieldset>
+            <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!authForm.valid" type="submit">
+              {{ title }}
+            </button>
+          </fieldset>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>-->
+
+
+
+
+<!--//main__body//card////margin-left:600px;width:1000px/////class="login__page"//col-md-offset-4///////////////////////////////////////////////////////-->
+<div class="auth-page" style="padding-top:0px;margin-top:120px;">
+  <div class="container page">
+
+    <div >
+      <div class="row">
+          <div class="card col-md-6 offset-md-3 col-xs-12" style="">
+            <div class="login__card">
+              <div class="card-block">
+                  <list-errors [errors]="errors"></list-errors>
+
+                  <div class="form-group">
+                      <button  class="btn btn-outline-success form-control form-control-lg"
+                        style="overflow: auto;"
+                        (click)="login()">
+                        Continue as {{userDetails.displayName || userDetails.email}}.
+                      </button>
+                  </div>
+                    
+
+                 <!--////////style="margin-left:165px"//////////////-->
+                 <!-- <form >
+                    <h3 align="center">Login Form</h3>
+                    <fieldset class="form-group">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    </fieldset>
+                    <fieldset class="form-group">
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    </fieldset>
+
+                    <div class="form-group">
+                        <button type="buton" class="btn btn-primary btn-block" style="margin-bottom: 20px">
+                          Login with Email
+                        </button>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <button type="buton" class="btn btn-block" (click)="signInWithFacebook()">
+                          <i class="fa fa-facebook" aria-hidden="true"></i> 
+                          Login with Facebook
+                        </button>
+
+                        <button type="button" class="btn btn-block" (click)="signInWithTwitter()">
+                          <i class="fa fa-twitter" aria-hidden="true"></i>
+                          Login with Twitter
+                        </button>
+
+                        <button type="button" class="btn btn-block">
+                          <i class="fa fa-github" aria-hidden="true"></i>
+                          Login with Github
+                        </button>
+
+                        <button type="button" class="btn btn-block" (click)="signInWithGoogle()">
+                          <i class="fa fa-google" aria-hidden="true"></i>
+                          Login with Google
+                        </button>
+                    </div>                  
+                  </form>-->
+                  
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div> <!-- end card -->
+
+  </div>  <!-- end container -->
+</div> 
+<!--//////////////////////////////////////////////////////////////////////-->

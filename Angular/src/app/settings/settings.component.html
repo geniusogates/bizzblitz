@@ -1,0 +1,153 @@
+<div *ngIf="currentUser" class="settings-page">
+  <div class="container page">
+    <div class="row" style="padding-top:0px;margin-top:120px;">
+      <div class="col-md-6 offset-md-3 col-xs-12">
+
+        <h1 class="text-xs-center">Your Settings</h1>
+
+        <list-errors [errors]="errors"></list-errors>
+
+        <form [formGroup]="settingsForm" >
+          <!--//////////(ngSubmit)="submitForm()"///////////-->
+          <fieldset > <!--////////[disabled]="isSubmitting"//////////-->
+            
+            <!--<fieldset class="form-group">
+              <input class="form-control"
+                type="text"
+                placeholder="URL of profile picture"
+                formControlName="image" />
+            </fieldset> {{currentUser.displayName}}//{{currentUser.email}}-->
+
+            <fieldset class="form-group">
+              <input class="form-control form-control-lg"
+                type="text"
+                placeholder="Username"
+                formControlName="username" />
+            </fieldset>
+
+            <fieldset class="form-group">
+              <textarea class="form-control form-control-lg"
+                rows="8"
+                placeholder="Short bio about you"
+                formControlName="bio">
+              </textarea>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <button disabled class="btn btn-outline-success form-control form-control-lg">{{currentUser.email}}</button>
+              <!--<input class="form-control form-control-lg"
+                type="email"
+                placeholder="Email"
+                formControlName="email" />-->
+            </fieldset>
+
+            <!--<fieldset class="form-group">
+              <input class="form-control form-control-lg"
+                type="password"
+                placeholder="New Password"
+                formControlName="password" />
+            </fieldset>-->
+            <p>Choose your profile Photo below:</p>
+            <fieldset class="form-group">
+                
+                                 <!--INPUT FOR IMAGE UPLOADING postImage-->
+                         
+                                  <!--<input type="file" class="form-control"
+                                  id=image
+                                  ngFileSelect
+                                  [options]="options"
+                                  (onUpload)="handleUpload($event)"
+                                  (beforeUpload)="beforeUpload($event)">
+                                  -->
+                                  <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera">
+                                  <button (click)="upload()">Upload</button>
+                                  <!--Response: {{uploadFile}}-->
+                                  <div [hidden]="uploadComplete" style="color:blue;"><h6>{{uploadStarted}}</h6></div>
+                                  <div style="color:green;"><h6>{{uploadComplete}}</h6></div>
+                
+                                  <div>
+                                      <cl-image width="300" height="200" style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" [public-id]="imageId" [cloud-name]="uploader.cloudName"></cl-image>
+                                      <!--<p>Please, wait for image to appear before u hit 'update' button, may take a few seconds depending on your internet..</p>-->
+                                      <!--<img style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" src="{{uploadFile.image}}">-->
+                                   
+                                  </div>
+                
+            </fieldset>
+            <!--//////////////////////////////////////////////////////////-->
+            <button type="button" class="btn btn-primary" (click)="toggleImage()">+Add Cover Photo</button>
+            <!--/////////////////////////////////////////////////////////-->
+            <div *ngIf=isAddImage>
+            <fieldset class="form-group">
+                
+                                 <!--INPUT FOR IMAGE UPLOADING postImage-->
+                         
+                                  <!--<input type="file" class="form-control"
+                                  id=image
+                                  ngFileSelect
+                                  [options]="options1"
+                                  (onUpload)="handleUpload1($event)"
+                                  (beforeUpload)="beforeUpload1($event)">
+                                  -->
+                                  <input type="file" ng2FileSelect [uploader]="uploader2" accept="image/*;capture=camera">
+                                  <button (click)="upload2()">Upload</button>
+                                  <!--Response: {{uploadFile2}}-->
+                                  <div [hidden]="uploadComplete2" style="color:blue;"><h6>{{uploadStarted2}}</h6></div>
+                                  <div style="color:green;"><h6>{{uploadComplete2}}</h6></div>
+                
+                                  <div>
+                                      <cl-image width="300" height="200" style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" [public-id]="imageId2" [cloud-name]="uploader2.cloudName"></cl-image>
+                                      <!--<p>Please, wait for image to appear before u hit 'update' button, may take a few seconds depending on your internet..</p>-->
+                                      <!--<img style="width:80%; height:''; margin-left:10%; margin-right:10%;" class="thumbnail" src="{{uploadFile1.image}}">-->
+                                   
+                                  </div>
+                
+            </fieldset>
+            </div>
+                           
+                
+                            <fieldset hidden class="form-group">
+                              <input class="form-control"
+                                type="text"
+                                value="{{uploadFile}}"
+                                name = "image"
+                                name="image" [(ngModel)]="image"
+                                
+                                formControlName="image" />
+                            </fieldset>
+                            <fieldset hidden class="form-group">
+                              <input class="form-control"
+                                type="text"
+                                value="{{uploadFile2}}"
+                                name = "image"
+                                name="image2" [(ngModel)]="image2"
+                                formControlName="image1"
+                                 />
+                            </fieldset>
+                            <!--/////-->
+            <div style="color:green;"><h6>{{successfull}}</h6></div>
+            <button class="btn btn-lg btn-primary pull-xs-right"
+              (click)="submitForm()" (click)="navigate()">
+              Update Settings
+            </button>
+
+          </fieldset>
+        </form>
+        <!--/////////type="submit"/////////////-->
+
+        <!-- Line break for logout button//(click)="logout()"////////(click)="navigate()" -->
+        <hr />
+
+        <button class="btn btn-outline-danger"
+          (click)="logout()"
+          (click)="authService.logout()">
+          Or click here to logout.
+        </button>
+        <!--<button class="btn btn-outline-success"
+          (click)="addUser()">
+          Try adding user
+        </button>-->
+
+      </div>
+    </div>
+  </div>
+</div>
